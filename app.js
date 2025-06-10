@@ -26,3 +26,14 @@ http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Hello from Node.js server!');
 }).listen(3000);
+
+
+// express API endpoint 
+const express = require('express');
+const app = express();
+
+app.get('/api/hello', (req, res) => {
+    res.json({ message: 'Hello API!' });
+});
+
+app.listen(3000);
