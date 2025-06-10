@@ -46,3 +46,10 @@ const secret = 'supersecret';
 
 const token = jwt.sign({ id: 1 }, secret, { expiresIn: '1h' });
 console.log(token);
+
+
+
+//environment variawbles with dotenv
+require('dotenv').config();
+
+console.log(process.env.MY_SECRET); // From .env file
