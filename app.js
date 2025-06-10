@@ -75,3 +75,12 @@ app.post('/submit', (req, res) => {
 // CORS setup 
 const cors = require('cors');
 app.use(cors());
+
+
+//simpe logger with fs + date 
+const log = (msg) => {
+    const timestamp = new Date().toISOString();
+    fs.appendFileSync('log.txt', `[${timestamp}] ${msg}\n`);
+};
+
+log('Server started');
