@@ -37,3 +37,12 @@ app.get('/api/hello', (req, res) => {
 });
 
 app.listen(3000);
+
+
+
+//JWT token generation 
+const jwt = require('jsonwebtoken');
+const secret = 'supersecret';
+
+const token = jwt.sign({ id: 1 }, secret, { expiresIn: '1h' });
+console.log(token);
