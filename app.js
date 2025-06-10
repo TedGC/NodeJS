@@ -61,3 +61,12 @@ app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
     next();
 });
+
+
+// parse JSON body in express
+app.use(express.json());
+
+app.post('/submit', (req, res) => {
+    console.log(req.body);
+    res.send('Received!');
+});
