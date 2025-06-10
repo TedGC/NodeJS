@@ -53,3 +53,11 @@ console.log(token);
 require('dotenv').config();
 
 console.log(process.env.MY_SECRET); // From .env file
+
+
+
+// middleware in express 
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
