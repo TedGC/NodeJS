@@ -70,3 +70,8 @@ app.post('/submit', (req, res) => {
     console.log(req.body);
     res.send('Received!');
 });
+
+
+// CORS setup 
+const cors = require('cors');
+app.use(cors());
