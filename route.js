@@ -73,3 +73,13 @@ appEvents.on('userRegistered', (user) => {
 
 // Usage:
 appEvents.emit('userRegistered', { email: 'ted@example.com' });
+
+
+import fs from 'fs';
+import http from 'http';
+
+http.createServer((req, res) => {
+    const stream = fs.createReadStream('./largefile.txt');
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    stream.pipe(res);
+}).listen(3000);
