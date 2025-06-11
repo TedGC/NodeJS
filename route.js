@@ -61,3 +61,15 @@ export function authMiddleware(req, res, next) {
         res.status(403).json({ message: 'Invalid token' });
     }
 }
+
+
+import { EventEmitter } from 'events';
+
+const appEvents = new EventEmitter();
+
+appEvents.on('userRegistered', (user) => {
+    console.log(`Welcome email sent to ${user.email}`);
+});
+
+// Usage:
+appEvents.emit('userRegistered', { email: 'ted@example.com' });
