@@ -83,3 +83,17 @@ http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     stream.pipe(res);
 }).listen(3000);
+
+
+import express from 'express';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+
+const app = express();
+
+app.use('/api', createProxyMiddleware({
+    target: 'https://jsonplaceholder.typicode.com',
+    changeOrigin: true,
+    pathRewrite: { '^/api': '' },
+}));
+
+app.listen(3000);
