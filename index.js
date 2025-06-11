@@ -26,10 +26,15 @@ const server = http.createServer((req, res) => {
         return req.on('end', () => {
             const parsedBody = Buffer.concat(body).toString()
             console.log(parsedBody)
-            fs.writeFileSync('message.txt', 'DUMYY')
-            res.statusCode = 302
-            res.setHeader('Location', '/')
-            return res.end()
+            const message = parsedBody.split('=')[1]
+            // instead of using WriteFileSync, use writeFile as FileSync has to be done
+            // to proceed to next steps which is very time consuming 
+            fs.writeFile('message.txt', message, (err) => {
+                res.statusCode = 302
+                res.setHeader('Location', '/')
+                return res.end()
+            })
+
         })
 
     }
@@ -42,3 +47,17 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(3000)
+
+
+/**
+ * The even loop operation at one queue 
+ * 1. timers - execute setTiemOut and setInteval callbacks, functions such as these 
+ * very much responstive will get on the working load immediately
+ * 2. pending callbacks - executing I/O related (input & output -- disk & network
+ * operations (~blocking operations ) ) callbacks that were defered 
+ * 3. Poll - retreive new I/O events, execute their callbacks. If these callbacks are 
+ * not yet to complete, NodeJs will send them over to the pending callbacks  
+ * 4. check = execute setImmediate() callbacks, but after those callbacks mentioned above
+ * 5. close callbacks - execute all 'close' event callbacks 
+ * 
+ */
