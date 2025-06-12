@@ -1,5 +1,5 @@
 import http from 'node:http'
-import requestHandler from '../route.js'
+import requestHandler from './route.js'
 
 // parse code, register variables & functions --- crates event loops
 // this keeps on urnning as long as thee are event listeners registered 
