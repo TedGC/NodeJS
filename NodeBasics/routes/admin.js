@@ -1,6 +1,7 @@
 import express from 'express'
 import path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
+import { fileURLToPath, } from 'url';
+import { __dirname as rootDir } from '../util/path.js';
 
 export const router = express.Router()
 
@@ -18,7 +19,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 router.get('/add', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../', 'view', 'admin.html'))
+    res.sendFile(path.join(rootDir, 'view', 'admin.html'))
 })
 
 // Handle form submission

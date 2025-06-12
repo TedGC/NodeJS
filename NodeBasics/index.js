@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import { router as adminRouter } from './routes/admin.js'
 import { router as shopRouter } from './routes/shop.js'
 import { router as errorRouter } from './routes/404.js'
+
 const app = express();
 
 // Middleware to parse form data

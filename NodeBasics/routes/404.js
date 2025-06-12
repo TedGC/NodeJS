@@ -10,6 +10,6 @@ const __dirname = path.dirname(__filename)
 
 
 router.get('/404', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../', 'view', '404.html'))
+    res.status(404).sendFile(path.join(__dirname, '../', 'view', '404.html'))
 })
 
