@@ -25,3 +25,16 @@ server.listen(3000)
  * 5. close callbacks - execute all 'close' event callbacks 
  * 
  */
+
+
+/**
+ * 3rd part ypackages 
+ * 1. node projects typically don't just use core moduels and custom code bu also 
+ * third-party packages
+ * 2. you can differentiate between production dependencies (--save), develiopment 
+ * dependencies (--save-dev) and global dependencies (-g)
+ * 
+ * 
+ * 
+ * 
+ */
