@@ -8,7 +8,7 @@ const app = express();
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/amdin', adminRouter)
+app.use('/admin', adminRouter)
 // Homepage
 app.use(shopRouter)
 
