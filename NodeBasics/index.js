@@ -8,9 +8,13 @@ const app = express();
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(adminRouter)
+app.use('/amdin', adminRouter)
 // Homepage
 app.use(shopRouter)
+
+app.use('/', (req, res, next) => {
+    res.status(400).send('<h1>page not found </h1>')
+})
 
 // Start server
 app.listen(3000);
