@@ -1,16 +1,27 @@
-import http from 'node:http'
-import requestHandler from './route.js'
+import express from 'express';
+import bodyParser from 'body-parser';
+import { router as adminRouter } from './routes/admin.js'
+import { router as shopRouter } from './routes/shop.js'
+
+const app = express();
+
+// Middleware to parse form data
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(adminRouter)
+// Homepage
+app.use(shopRouter)
+
+// Start server
+app.listen(3000);
+
 
 // parse code, register variables & functions --- crates event loops
 // this keeps on urnning as long as thee are event listeners registered 
-const server = http.createServer(requestHandler)
+
 // console.log(req.url, req.headers, req.method)
 // process.exit() 
 // this quits server if there is no event to loop around
-
-
-
-server.listen(3000)
 
 
 /**
