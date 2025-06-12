@@ -3,11 +3,19 @@ import bodyParser from 'body-parser';
 import { router as adminRouter } from './routes/admin.js'
 import { router as shopRouter } from './routes/shop.js'
 import { router as errorRouter } from './routes/404.js'
+import { fileURLToPath, } from 'url';
+import path from 'path'
+
 
 const app = express();
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/admin', adminRouter)
 // Homepage
@@ -56,3 +64,5 @@ app.listen(3000);
  * 
  * 
  */
+
+
