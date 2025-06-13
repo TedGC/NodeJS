@@ -16,6 +16,8 @@ exports.postAddProduct = (req, res, next) => {
   res.redirect('/');
 };
 
+//think of this as 'props' and 'children' to pass down to '.html' or '.pug' files 
+// in the view foelr 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll(products => {
     res.render('shop/product-list', {
