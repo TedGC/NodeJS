@@ -32,7 +32,7 @@ router.get('/add-product', productController.getAddProduct)
 //     res.redirect('/');
 // });
 
-router.post('/', productController.postProduct)
+router.post('/add-product', productController.postProduct)
 
 const adminData = {
     router,

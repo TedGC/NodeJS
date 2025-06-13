@@ -1,3 +1,6 @@
+import Product from "../models/product.js";
+
+
 const getAddProduct = (req, res, next) => {
     res.render('add-product', {
         pageTitle: 'Add Product',
@@ -8,14 +11,14 @@ const getAddProduct = (req, res, next) => {
     })
 }
 
-const products = []
-
 const postProduct = (req, res, next) => {
-    products.push({ title: req.body.title, path: '/admin/add-product' })
+    const product = new Product(req.body.title)
+    product.save()
     res.redirect('/');
 }
 
 const getProduct = (req, res, next) => {
+    const products = Product.fetchAll()
     res.render('product', {
         products,
         pageTitle: 'shop',

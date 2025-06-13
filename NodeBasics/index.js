@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import adminData from './routes/add-product.js'
-import { router as shopRouter } from './routes/product.js'
+import productData from './routes/product.js';
 import { router as errorRouter } from './routes/404.js'
 import { fileURLToPath, } from 'url';
 import path from 'path'
@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/admin', adminData.router)
 // Homepage
-app.use(shopRouter)
+app.use('/', productData.router)
 
 app.use(errorRouter)
 
