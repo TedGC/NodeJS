@@ -58,3 +58,19 @@ export default class Product {
 
     }
 }
+
+
+/**
+ * 
+ * Model 
+ * 1. responsible for representing your data
+ * 2. Responsbile for managing your data (saving, fetching...)
+ * 3. Doesn't matter if you manage data in memory, files, databases
+ * 4. contains data-related logic
+ * 
+ * Controller
+ * 1. connects model and view
+ * 2. should only make sure that the tow can communicate (in both directions)
+ * 
+ * 
+ */
