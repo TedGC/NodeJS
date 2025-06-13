@@ -13,6 +13,8 @@ const __dirname = path.dirname(__filename);
 export const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    console.log(adminData.products)
-    res.sendFile(path.join(__dirname, '../', 'view', 'product.html'));
+    const products = adminData.products
+    res.render('product', { products, docTitle: 'Product' })
+    // console.log(adminData.products)
+    // res.sendFile(path.join(__dirname, '../', 'view', 'product.html'));
 });
