@@ -9,6 +9,9 @@ import path from 'path'
 
 const app = express();
 
+
+//app.engine('handlebars', expressHbd())
+//app.set('view engine', 'handlebars')
 app.set('view engine', 'pug')
 app.set('views', 'view')
 

@@ -7,14 +7,14 @@ import adminData from './add-product.js';
 // Fix __dirname for ES modules
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 export const router = express.Router();
 
 router.get('/', (req, res, next) => {
     const products = adminData.products
-    res.render('product', { products, docTitle: 'Product' })
+    res.render('product', { products, docTitle: 'Product', path: '/' })
     // console.log(adminData.products)
     // res.sendFile(path.join(__dirname, '../', 'view', 'product.html'));
 });

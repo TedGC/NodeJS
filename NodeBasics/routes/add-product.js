@@ -21,12 +21,14 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 router.get('/add-product', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../', 'view', 'add-product.html'))
+    res.render('add-product', { pageTitle: 'Add Product', path: '/admin/add-product' });
+
+    // res.sendFile(path.join(__dirname, '../', 'view', 'add-product.html'))
 })
 
 // Handle form submission
 router.post('/add-product', (req, res, next) => {
-    products.push({ title: req.body.title })
+    products.push({ title: req.body.title, path: '/admin/add-product' })
     res.redirect('/');
 });
 
