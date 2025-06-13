@@ -4,20 +4,19 @@ import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
+const p = path.join(__dirname, '../', 'data', 'products.json')
 
 
 // creating this fucntion as a helper function to organiza the sturucture of 
 // other functions here 
-const getProductsFromFile = cb => {
-
-    const p = path.join(__dirname, '../', 'data', 'products.json')
+const getProductsFromFile = (cb) => {
 
     fs.readFile(p, (err, fileContent) => {
         if (err) {
             return cb([])
+        } else {
+            cb(JSON.parse(fileContent))
         }
-        cb(JSON.parse(fileContent))
     })
 
 
@@ -35,24 +34,23 @@ export default class Product {
 
     save() {
         getProductsFromFile(products => {
-            products.push(this)
-            fs.writeFile(p, JSON.stringify, err => {
-
+            products.push(this);
+            fs.writeFile(p, JSON.stringify(products), err => {
+                console.log(err)
             })
         })
         // products.push(this)
-        fs.readFile(p, (err, fileContent) => {
 
-            // let products = []
-            // if (!err) {
-            //     products = JSON.parse(fileContent)
-            // }
-            // products.push(this)
-            // fs.writeFile(p, JSON.stringify(products), (err) => {
+        // let products = []
+        // if (!err) {
+        //     products = JSON.parse(fileContent)
+        // }
+        // products.push(this)
+        // fs.writeFile(p, JSON.stringify(products), (err) => {
 
-            //     console.log(err)
-            // })
-        })
+        //     console.log(err)
+        // })
+
     }
 
     static fetchAll(cb) {
