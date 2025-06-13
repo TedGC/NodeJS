@@ -10,8 +10,8 @@ import path from 'path'
 const app = express();
 
 
-//app.engine('handlebars', expressHbd())
-//app.set('view engine', 'handlebars')
+//app.engine('hbs', expressHbd())
+//app.set('view engine', 'hbs')
 app.set('view engine', 'pug')
 app.set('views', 'view')
 
@@ -88,3 +88,19 @@ app.listen(3000);
  */
 
 
+/**
+ * MVC - separation of concerns
+ * Models 
+ * 1) represent your data in your code
+ * 2) work with your data (e.g. save, fetch)
+ * 
+ * Views 
+ * 1) what the users sess
+ * 2) decoupled from your appliication code
+ * 
+ * Controllers 
+ * 1) connecting your model and your views
+ * 2) contain the 'in-betwen logic
+ * 
+ * 
+ */

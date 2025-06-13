@@ -1,7 +1,7 @@
 import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import adminData from './add-product.js';
+
+
+import productController from '../controllers/product.js';
 
 
 // Fix __dirname for ES modules
@@ -12,9 +12,8 @@ import adminData from './add-product.js';
 
 export const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    const products = adminData.products
-    res.render('product', { products, docTitle: 'Product', path: '/' })
-    // console.log(adminData.products)
-    // res.sendFile(path.join(__dirname, '../', 'view', 'product.html'));
-});
+router.get('/', productController.getProduct)
+// const products = adminData.products
+// res.render('product', { products, docTitle: 'Product', path: '/' })
+// console.log(adminData.products)
+// res.sendFile(path.join(__dirname, '../', 'view', 'product.html'));
