@@ -18,13 +18,14 @@ const postProduct = (req, res, next) => {
 }
 
 const getProduct = (req, res, next) => {
-    const products = Product.fetchAll()
-    res.render('product', {
-        products,
-        pageTitle: 'shop',
-        path: '/',
-        // hasProducts: products.length > 0,
-        // activeShop: true
+    Product.fetchAll((products) => {
+        res.render('product', {
+            products,
+            pageTitle: 'shop',
+            path: '/',
+            // hasProducts: products.length > 0,
+            // activeShop: true
+        })
     })
 }
 
