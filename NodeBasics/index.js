@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { router as adminRouter } from './routes/add-product.js'
+import adminData from './routes/add-product.js'
 import { router as shopRouter } from './routes/product.js'
 import { router as errorRouter } from './routes/404.js'
 import { fileURLToPath, } from 'url';
@@ -9,7 +9,6 @@ import path from 'path'
 
 const app = express();
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 // Middleware to parse form data
@@ -17,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/admin', adminRouter)
+app.use('/admin', adminData.router)
 // Homepage
 app.use(shopRouter)
 
@@ -61,6 +60,22 @@ app.listen(3000);
  * dependencies (--save-dev) and global dependencies (-g)
  * 
  * 
+ * ExpressJS is NodeJS framework - a package that adds a bunch of utility functions and tools
+ * and a clear set of rules on how the app should be built (middleware)
+ * it's highly extensible and other packages can be plugged into it 
+ * 
+ * Next() and res()
+ * ExpressJS relies heavily on middleware functions - you can eaisly add them by 
+ * calling use() 
+ * Middleware functions handle a request and should call next() to forward the request
+ * to the next function in line or send a response 
+ * 
+ * 
+ * Routing
+ * you can filter requests by path and method
+ * if you filter by method, paths are matched exaclty, othersie, the first segment of a URL
+ * is matched
+ * you can use the express.Router to split your routes across files elegnatly 
  * 
  * 
  */

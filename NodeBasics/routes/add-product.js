@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath, } from 'url';
 
 
-export const router = express.Router()
+const router = express.Router()
 
 // Show product input form
 // router.get('/add-product', (req, res, next) => {
@@ -15,6 +15,8 @@ export const router = express.Router()
 //   `);
 // });
 
+const products = []
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -24,8 +26,16 @@ router.get('/add-product', (req, res, next) => {
 
 // Handle form submission
 router.post('/add-product', (req, res, next) => {
-    console.log(req.body); // logs { title: 'whatever user typed' }
+    products.push({ title: req.body.title })
     res.redirect('/');
 });
+
+
+const adminData = {
+    router,
+    products
+}
+
+export default adminData
 
 
