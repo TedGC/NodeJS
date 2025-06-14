@@ -40,6 +40,7 @@ module.exports = class Product {
   // need to have have a callback function at the end for fs.writeFile
   // as a mandatory source to run the code below 
   save() {
+    this.id = Math.random().toString()
     getProductsFromFile(products => {
       products.push(this);
       fs.writeFile(p, JSON.stringify(products), err => {
@@ -51,6 +52,12 @@ module.exports = class Product {
   // have a callback function to reflect the factor above 
   static fetchAll(cb) {
     getProductsFromFile(cb);
+  }
+
+  static findById(id, cb) {
+    getProductsFromFile(products => {
+
+    })
   }
 };
 // this function has been updated becasue there was a logic effort following the 
