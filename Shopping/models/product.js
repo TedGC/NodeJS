@@ -38,16 +38,26 @@ module.exports = class Product {
 
 
   // need to have have a callback function at the end for fs.writeFile
-  // as a mandatory source to run the code below 
+
   save() {
-    this.id = Math.random().toString()
     getProductsFromFile(products => {
-      products.push(this);
-      fs.writeFile(p, JSON.stringify(products), err => {
-        console.log(err);
-      });
-    });
+      if (this.id) {
+        const existingProductIndex = products.findIndex(product => product.id === id)
+        const updatedProducts = [...products]
+        updatedproducts[existingProductIndex] = this
+        fs.writeFile(p, JSON.stringify(updatedProducts), err => {
+          console.log(err)
+        })
+      } else {
+        this.id = Math.random().toString()
+        products.push(this)
+        fs.writeFile(p, JSON.stringify(products), err => {
+          console.log(err)
+        })
+      }
+    })
   }
+
   // just like save() function above, the fetchAll function in "Controller" should
   // have a callback function to reflect the factor above 
   static fetchAll(cb) {
