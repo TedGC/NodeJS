@@ -32,3 +32,19 @@ exports.getProducts = (req, res, next) => {
     });
   });
 };
+
+// this is to find a product that matches the ID generated from random.math method 
+exports.getProduct = (req, res, next) => {
+  const prodID = req.params.productId
+  Product.findById(prodId, product => {
+    res.render('shop/product-detail', { product: product })
+  })
+  res.redirect('/')
+}
+
+
+exports.postCart = (req, res, next) => {
+  const prodId = req.body.productId
+  console.log(prodId)
+  res.redirect('/cart')
+}
