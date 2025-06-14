@@ -9,7 +9,7 @@ const p = path.join(path.dirname(process.mainModule.filename),
 module.exports = class Cart {
     static addProduct(id, productPrice) {
         fs.readFile(p, (err, fileContent) => {
-            let cart = { products: [], totalPrice = 0 }
+            let cart = { products: [], totalPrice: 0 }
             if (!err) {
                 cart = JSON.parse(fileContent)
             }
