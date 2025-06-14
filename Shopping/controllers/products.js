@@ -35,7 +35,7 @@ exports.getProducts = (req, res, next) => {
 
 // this is to find a product that matches the ID generated from random.math method 
 exports.getProduct = (req, res, next) => {
-  const prodID = req.params.productId
+  const prodId = req.params.productId
   Product.findById(prodId, product => {
     res.render('shop/product-detail', { product: product })
   })
@@ -48,5 +48,5 @@ exports.postCart = (req, res, next) => {
   Product.findById(prodId, product => {
     Cart.addProduct(prodId, product.price)
   })
-  res.redirect('/')
+  res.redner('/cart ')
 }
