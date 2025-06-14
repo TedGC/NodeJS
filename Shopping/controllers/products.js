@@ -18,6 +18,8 @@ exports.postAddProduct = (req, res, next) => {
 
 //think of this as 'props' and 'children' to pass down to '.html' or '.pug' files 
 // in the view foelr 
+
+// since fetchAll() function is a static functi
 exports.getProducts = (req, res, next) => {
   Product.fetchAll(products => {
     res.render('shop/product-list', {

@@ -53,3 +53,6 @@ module.exports = class Product {
     getProductsFromFile(cb);
   }
 };
+// this function has been updated becasue there was a logic effort following the 
+// length > 0 in .pug file to set up a configuration to show certain features
+//only when a certain condition is met and ready to go 
