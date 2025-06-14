@@ -29,7 +29,8 @@ module.exports = class Cart {
                 }
                 cart.products = [...cart.products, updatedProduct]
             }
-            cart.totalPrice = cart.totalPrice + productPrice
+            cart.totalPrice = cart.totalPrice + +productPrice   // this is to convert the string 
+            // to a nubmer by addting '+' in front ot the variable 
             fs.wrtieFile(p, JSON.stringify(cart), (err) => {
                 console.log(err)
             })
