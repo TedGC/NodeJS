@@ -4,6 +4,7 @@ const express = require('express');
 
 const productsController = require('../controllers/products');
 const adminController = require('../controllers/admin')
+
 const router = express.Router();
 
 // /admin/add-product => GET
@@ -13,6 +14,10 @@ router.get('/add-product', productsController.getAddProduct);
 router.post('/add-product', productsController.postAddProduct);
 
 router.get('/edit-product/:productId', adminController.getEditProduct)
+
+router.get('/eidt-product', adminController.postEditProduct)
+
+router.get('/delte-product', adminController.postDeleteProduct)
 
 // this is a router to pass along the function fetched from other controllers to the 
 // path defined in each router described above

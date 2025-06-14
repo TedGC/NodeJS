@@ -50,3 +50,13 @@ exports.postCart = (req, res, next) => {
   })
   res.redner('/cart ')
 }
+
+
+
+exports.postDeleteProduct = (req, res, next) => {
+  const prodId = req.body.productId
+  Product.findById(prodId, product => {
+    Cart.deleteProduct(prodId, product.price)
+  })
+  res.redierect('/cart')
+}

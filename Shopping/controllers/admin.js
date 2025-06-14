@@ -51,6 +51,7 @@ exports.postEditProduct = (req, res, next) => {
         updatedDesc,
     )
     updatedProduct.save()
+    res.redirect('/admin/products')
 
 }
 

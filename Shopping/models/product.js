@@ -62,6 +62,16 @@ module.exports = class Product {
     })
   }
 
+  static deleteProduct(id, productPrice) {
+    fs.readFile(p, (err, fileContent) => {
+      if (err) {
+        return
+      }
+      const updatedCart = { ...cart }
+      const productIndex =  
+  })
+  }
+
   // just like save() function above, the fetchAll function in "Controller" should
   // have a callback function to reflect the factor above 
   static fetchAll(cb) {
