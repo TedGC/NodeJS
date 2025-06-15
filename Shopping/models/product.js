@@ -68,8 +68,11 @@ module.exports = class Product {
         return
       }
       const updatedCart = { ...cart }
-      const productIndex =  
-  })
+      const product = updatedCart.products.findIndex(product => product.id === id)
+      const productQty = product.quantity
+      udpatedCart.products = updatedCart.products.filter(product => product.id !== id)
+      cart.totalPrice = cart.totalPrice - productPrice * productQty
+    })
   }
 
   // just like save() function above, the fetchAll function in "Controller" should
