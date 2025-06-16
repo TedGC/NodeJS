@@ -48,15 +48,51 @@ exports.postCart = (req, res, next) => {
   Product.findById(prodId, product => {
     Cart.addProduct(prodId, product.price)
   })
-  res.redner('/cart ')
+  res.redirect('/cart ')
 }
 
 
-
+// the reason why we need Product.findById is to find a product that mtached the Id 
+// we are looking for and retrieve all the data inclduing the price information
+// so that we can delte the informaiton about the price and post it to the backened 
+// and update the related data
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId
   Product.findById(prodId, product => {
     Cart.deleteProduct(prodId, product.price)
   })
-  res.redierect('/cart')
+  res.redirect('/cart')
+}
+
+// the function below servers a different purpose in that it posts the updated data 
+// to the cart, not just delivering the function of deleting the product information 
+// that matches the Id we are providing to the funciton 
+
+exports.postCartDeleteProduct = (req, res, next) => {
+  const prodId = req.body.productId
+  Product.findById(prodId, product => {
+    Cart.deleteProduct(prodId, product.price)
+    res.redirect('/cart')
+  })
+}
+
+
+exports.getCart = (req, res, next) => {
+  Cart.getCart(cart => {
+    Product.fetchAll(products => {
+      const cartProducts = []
+      for (product of products) {
+        const cartProductData = cart.product.find(prod => prod.id === product.id)
+        if (cartProductData) {
+          cartProducts.push({ productData: product, qty: cartProductData.qty })
+        }
+      }
+
+    })
+  })
+  res.render('shop/cart', {
+    path: '/cart',
+    pageTitle: 'Your Cart',
+    products: cartProducts
+  })
 }

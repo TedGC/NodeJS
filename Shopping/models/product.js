@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { fileURLToPath } = require('url');
 
-
+const Cart = require('./cart')
 // const __filename = fileURLToPath(import.meta.url)
 // const __dirname = path.dirname(__filename)
 
@@ -48,7 +48,7 @@ module.exports = class Product {
       if (this.id) {
         const existingProductIndex = products.findIndex(product => product.id === id)
         const updatedProducts = [...products]
-        updatedproducts[existingProductIndex] = this
+        updatedProducts[existingProductIndex] = this
         fs.writeFile(p, JSON.stringify(updatedProducts), err => {
           console.log(err)
         })
@@ -62,18 +62,18 @@ module.exports = class Product {
     })
   }
 
-  static deleteProduct(id, productPrice) {
-    fs.readFile(p, (err, fileContent) => {
-      if (err) {
-        return
-      }
-      const updatedCart = { ...cart }
-      const product = updatedCart.products.findIndex(product => product.id === id)
-      const productQty = product.quantity
-      udpatedCart.products = updatedCart.products.filter(product => product.id !== id)
-      cart.totalPrice = cart.totalPrice - productPrice * productQty
+  static deleteById(id) {
+    getProductsFromFile(products => {
+      const product = products.find(prod => prod.id === id)
+      const updatedProducts = products.filter(prod => prod.id !== id)
+      fs.writeFile(p, JSON.stringify(updatedProducts), err => {
+        if (!err) {
+          Cart.deleteProduct(id, product.pricce)
+        }
+      })
     })
   }
+
 
   // just like save() function above, the fetchAll function in "Controller" should
   // have a callback function to reflect the factor above 
