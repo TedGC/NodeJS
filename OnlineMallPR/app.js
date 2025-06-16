@@ -9,8 +9,6 @@ const app = express();
 
 const db = require('./util/database')
 
-db.execute('SELECT * FROM ')
-
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
