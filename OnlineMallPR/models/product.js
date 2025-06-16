@@ -22,7 +22,8 @@ module.exports = class Product {
   }
 
   save() {
-
+    return db.execute('INSERT INTO products (title, price, imageUrl, description) VALUES (?, ?, ?, ?)'
+      , [this.title, this.price, this.imageUrl, this.description])
 
 
     //   getProductsFromFile(products => {
@@ -71,5 +72,9 @@ module.exports = class Product {
     //     const product = products.find(p => p.id === id);
     //     cb(product);
     //   });
+  }
+
+  static findById(id) {
+    return db.execute('SELECT * FROM products WHERE products.id = ?', [id])
   }
 };
