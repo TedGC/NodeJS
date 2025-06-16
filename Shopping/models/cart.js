@@ -45,6 +45,9 @@ module.exports = class Cart {
             }
             const updatedCart = { ...JSON.parse(fileContent) }
             const product = updatedCart.products.findIndex(product => product.id === id)
+            if (!product) {
+                return
+            }
             const productQty = product.quantity
             updatedCart.products = updatedCart.products.filter(product => product.id !== id)
             cart.totalPrice = cart.totalPrice - productPrice * productQty
@@ -63,4 +66,23 @@ module.exports = class Cart {
         })
     }
 }
+
+
+/**
+ * Dynamic routing 
+ * 1. You can pass dynamic path segments by adding a ":" to the Express router path 
+ * 2. The name you add after ":" is the name by which you can extract the data on req. params
+ * 3. Optional (query) parameters can also be passed (?param=value&b=2) and extracted
+ * (req.query.myParam)
+ * 
+ * More on Models 
+ * 1. a cart model was added - it holds static methods only 
+ * 2. you can interact between modesl (e.g. delete cart item if a product is deleted)
+ * 3. working with fiels for data storage is suboptimal for bigger amounts of data 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 
