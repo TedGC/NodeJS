@@ -81,7 +81,27 @@ module.exports = class Cart {
  * 3. working with fiels for data storage is suboptimal for bigger amounts of data 
  * 
  * 
+ * SDQ 
+ * 1. data uses schemas 
+ * 2. relations 
+ * 3. data is distrbitued across multiple tables 
+ * 4. horizontal scaling is difficult / impossible; vertical scaling is possible 
+ * 5. limitations for lots of read & write queries per second 
  * 
+ * NoSQL 
+ * 1. schema-less
+ * 2. No (or very few) relations 
+ * 3. Data is typicall erged / nested in a few collections 
+ * 4. Both horizontal and vertical scaling is possible 
+ * 5. great performance for mass read & write requests
+ * 
+ * depdning on the situation for the application, we can utilize both SQL methodologies 
+ * for exmaple, if the applciation requries a lot of relational data that has to be 
+ * managed with certain logics and requires a certain level of organization, then 
+ * it might be recommended to use SQL over NoSQL 
+ * 
+ * if the data is too much and doens't require certain logics for relations, then NoSQL is
+ * recommended over SQL 
  * 
  * 
  */

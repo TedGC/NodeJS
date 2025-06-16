@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "../controllers"
+		},
+		{
+			"path": "../data"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../public"
+		},
+		{
+			"path": "../routes"
+		},
+		{
+			"path": "../util"
+		},
+		{
+			"path": "../views"
+		}
+	],
+	"settings": {}
+}
