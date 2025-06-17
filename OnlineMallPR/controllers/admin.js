@@ -121,6 +121,12 @@ exports.getProducts = (req, res, next) => {
   // });
 };
 
+// the reason why 'return' is used in this function is to stop 
+// going further below after the purpose of the function is fully 
+//delivered. 
+// because this fucntion has two promises 'findByPK & .then', it is 
+// better to use return to make sure the function is delivered 
+// successfully before moving on to the following one 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
 
