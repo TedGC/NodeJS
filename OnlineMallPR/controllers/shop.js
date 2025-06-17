@@ -25,6 +25,17 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
+  // Product.findAll({ where: { id = prodId } })
+  //   // although this is to find one record that matches the query specified here
+  //   // thi actually returns the array of the entity that matches the specified query
+
+  //   .then(products => {
+  //     res.render('shop/product-detail', {
+  //       product: products[0],
+  //       pageTitle: products[0].title,
+  //       path: '/products'
+  //     })
+  //   })
   Product.findByPk(prodId)
     // in Sequelize [product] is not used, so we can just use 'product' 
     .then(product => {
