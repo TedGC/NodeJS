@@ -94,7 +94,8 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 
-
+// this is whawt is connected to redirect the path to /admin/products 
+// after registering items and products using 'add products'
 exports.getProducts = (req, res, next) => {
   Product.findAll()
     .then(products => {
