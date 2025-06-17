@@ -61,7 +61,9 @@ exports.getProduct = (req, res, next) => {
 //   });
 // };
 
-
+//render() is a function to connect to the view (in this case, ejs file)
+// path is the actual url that would be exhibited on the searchbar
+// when routing this function in the actual website
 exports.getIndex = (req, res, next) => {
   Product.findAll()
     //.then([rows, fieldData] => {})
