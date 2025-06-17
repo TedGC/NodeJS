@@ -11,6 +11,8 @@ const Cart = require('../models/cart');
 //   });
 // };
 
+//this is using sequelize connect sync () and requries built-in functions such
+// as findAll, save, and others. 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll()
     .then(([rows, fieldData]) => {
