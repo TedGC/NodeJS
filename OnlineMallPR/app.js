@@ -51,10 +51,17 @@ app.use(errorController.get404);
 // creating associations between 'product' and 'user' within Sequlize
 Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' })
 User.hasMany(Product)
+User.hasOne(Cart)
+Cart.belongsTo(User) // not eseential to add here but just to 
+// clarify the relational association with User here
+Cart.belongsToMany(Product, { through: CartItem })
+// This only works with an intermediate table that connects them which 
+// basically stores a combination of product IDs and Cart IDs, and for that,
+// I created my cart item model
+//this is to tell sequelize where these connections should be stored and that is 
+// my cart item model, so I'll add that to both 'belongsToMany; calls here
 
-CartItem.belongTo(Cart, { constraints: true, onDelte: 'CASCADE' })
-Cart.hasMany(CartItem)
-
+Product.belongsToMany(Cart, { through: CartItem })
 
 sequelize
     .sync()
@@ -75,7 +82,10 @@ sequelize
         // Promise method 
     })
     .then(user => {
-        console.log(user)
+        return user.createCart()
+    })
+    .then(cart => {
+        // console.log(user)
         app.listen(3000)
     })
     .catch(err => {
