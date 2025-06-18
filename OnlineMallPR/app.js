@@ -35,7 +35,9 @@ app.use((req, res, next) => {
         // and we can access those methods whenever we call req.user in other files
         .then(user => {
             req.user = user
+            next()
         })
+        .catch(err => console.log(err))
 })
 
 app.use('/admin', adminRoutes);
