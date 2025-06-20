@@ -183,6 +183,8 @@ exports.postCartDeleteProduct = (req, res, next) => {
     })
     .then(products => {
       const product = products[0]
+      // another built-in function to delete the data within the table for that
+      // specific column
       return product.cartItem.destroy()
     })
     .then(result => {
