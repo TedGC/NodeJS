@@ -14,10 +14,10 @@ const Cart = require('../models/cart');
 //this is using sequelize connect sync () and requries built-in functions such
 // as findAll, save, and others. 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
-    .then(([rows, fieldData]) => {
+  Product.findAll()
+    .then(products => {
       res.render('shop/product-list', {
-        prods: rows,
+        prods: products,
         pageTitle: 'Products',
         path: '/products'
       })
@@ -126,6 +126,7 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
+  fetchedCart = cart
   req.user
     .getCart()
     .then(cart => {
@@ -133,7 +134,7 @@ exports.postCart = (req, res, next) => {
     })
     .then(products => {
       let product
-      if (product.length > 0) {
+      if (products.length > 0) {
         product = products[0]
       }
       let newQuantity = 1
@@ -146,7 +147,7 @@ exports.postCart = (req, res, next) => {
       }
       return Product.findByPk(prodId)
         .then(product => {
-          return fetchedProduct.addProduct(product, {
+          return fetchedCart.addProduct(product, {
             through: { quantity: newQuantity }
           })
         })
