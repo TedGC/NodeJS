@@ -140,6 +140,8 @@ exports.postCart = (req, res, next) => {
       }
       let newQuantity = 1
       if (product) {
+        //cartItem is a in-between table that needs to be fetched along with
+        // the product table 
         const oldQuantity = product.cartItem.quantity
         newQuantity = oldQuantity + 1
         return fetchedCart.addProduct(product, {
