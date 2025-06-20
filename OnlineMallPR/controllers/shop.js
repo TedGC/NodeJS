@@ -129,6 +129,7 @@ exports.postCart = (req, res, next) => {
   req.user
     .getCart()
     .then(cart => {
+      //this is to store cart so thtat it can be used in other instances as well
       fetchedCart = cart
       return cart.getProducts({ where: { id: prodId } })
     })
