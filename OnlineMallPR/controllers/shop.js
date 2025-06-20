@@ -153,6 +153,8 @@ exports.postCart = (req, res, next) => {
       }
       return Product.findByPk(prodId)
         .then(product => {
+          //addProduct comes from the relationships we built in app.js thorugh 
+          // .hasMany and .belongsToMany ... etc.
           return fetchedCart.addProduct(product, {
             through: { quantity: newQuantity }
           })
