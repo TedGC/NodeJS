@@ -144,6 +144,8 @@ exports.postCart = (req, res, next) => {
         // the product table 
         const oldQuantity = product.cartItem.quantity
         newQuantity = oldQuantity + 1
+
+        //becasue we need to update the cartItem and the column within that table 
         return fetchedCart.addProduct(product, {
           through: { quantity: newQuantity }
         })
