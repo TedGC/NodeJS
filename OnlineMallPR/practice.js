@@ -49,3 +49,14 @@ export const authMiddleware = (req, res, next) => {
         res.sendStatus(401);
     }
 };
+
+
+//async/await with postgreSQL
+import { Pool } from 'pg';
+const pool = new Pool();
+
+const getUsers = async () => {
+    const res = await pool.query('SELECT * FROM users');
+    console.log(res.rows);
+};
+getUsers();
