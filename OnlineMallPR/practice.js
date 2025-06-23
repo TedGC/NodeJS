@@ -85,3 +85,25 @@ const rateLimiter = (req, res, next) => {
     }
     next();
 };
+
+// creating RESTful API with express + MongoDB s
+import express from 'express';
+import mongoose from 'mongoose';
+
+mongoose.connect('mongodb://localhost:27017/test');
+
+const Product = mongoose.model('Product', {
+    name: String,
+    price: Number,
+});
+
+const app = express();
+app.use(express.json());
+
+app.post('/products', async (req, res) => {
+    const product = new Product(req.body);
+    await product.save();
+    res.status(201).send(product);
+});
+
+app.listen(3000);
