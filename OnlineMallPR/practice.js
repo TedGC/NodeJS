@@ -74,3 +74,14 @@ if (cluster.isPrimary) {
         res.end(`Served from PID: ${process.pid}`);
     }).listen(3000);
 }
+
+//rate limiter middleware 
+
+let requests = 0;
+const rateLimiter = (req, res, next) => {
+    requests++;
+    if (requests > 100) {
+        return res.status(429).send('Too Many Requests');
+    }
+    next();
+};
