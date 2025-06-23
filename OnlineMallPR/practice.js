@@ -60,3 +60,17 @@ const getUsers = async () => {
     console.log(res.rows);
 };
 getUsers();
+
+//node.js cluster setup
+import cluster from 'cluster';
+import os from 'os';
+import http from 'http';
+
+if (cluster.isPrimary) {
+    const cpuCount = os.cpus().length;
+    for (let i = 0; i < cpuCount; i++) cluster.fork();
+} else {
+    http.createServer((req, res) => {
+        res.end(`Served from PID: ${process.pid}`);
+    }).listen(3000);
+}
