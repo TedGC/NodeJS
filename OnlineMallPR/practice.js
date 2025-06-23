@@ -32,3 +32,20 @@ http.createServer((req, res) => {
     const stream = fs.createReadStream('./large.txt');
     stream.pipe(res);
 }).listen(3000);
+
+// JWT authentication middleware 
+
+import jwt from 'jsonwebtoken';
+
+export const authMiddleware = (req, res, next) => {
+    const token = req.headers['authorization'];
+    if (!token) return res.sendStatus(403);
+
+    try {
+        const decoded = jwt.verify(token, 'yourSecret');
+        req.user = decoded;
+        next();
+    } catch (err) {
+        res.sendStatus(401);
+    }
+};
