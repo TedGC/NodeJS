@@ -1,3 +1,5 @@
+// file upload with multer
+
 import express from 'express';
 import multer from 'multer';
 
@@ -10,7 +12,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
 app.listen(3000);
 
-
+//evet emitter custome example 
 import EventEmitter from 'events';
 
 class Notifier extends EventEmitter { }
