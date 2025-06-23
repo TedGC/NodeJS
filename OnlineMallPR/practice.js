@@ -107,3 +107,19 @@ app.post('/products', async (req, res) => {
 });
 
 app.listen(3000);
+
+//real time chat app with websocket 
+
+import { WebSocketServer } from 'ws';
+
+const wss = new WebSocketServer({ port: 8080 });
+
+wss.on('connection', ws => {
+    ws.on('message', message => {
+        wss.clients.forEach(client => {
+            if (client !== ws && client.readyState === ws.OPEN) {
+                client.send(message.toString());
+            }
+        });
+    });
+});
