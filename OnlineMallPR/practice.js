@@ -21,3 +21,12 @@ notifier.on('email', (user) => {
 });
 
 notifier.emit('email', 'ted@example.com');
+
+// streaming large file 
+import fs from 'fs';
+import http from 'http';
+
+http.createServer((req, res) => {
+    const stream = fs.createReadStream('./large.txt');
+    stream.pipe(res);
+}).listen(3000);
