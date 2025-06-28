@@ -225,3 +225,20 @@ const pipe = (...fns) => x => fns.reduce((v, f) => f(v), x);
 const double = n => n * 2;
 const square = n => n * n;
 console.log(pipe(double, square)(3)); // (3*2)^2 = 36
+
+/// lazy async data stream (with async generator)
+async function* lazyFetch(urls) {
+    for (const url of urls) {
+        const response = await fetch(url);
+        const data = await response.json();
+        yield data;
+    }
+}
+
+// Example usage:
+(async () => {
+    const urls = ['https://api.example.com/data1', 'https://api.example.com/data2'];
+    for await (const item of lazyFetch(urls)) {
+        console.log(item);
+    }
+})();
