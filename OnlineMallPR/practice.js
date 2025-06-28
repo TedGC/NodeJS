@@ -204,3 +204,17 @@ async function retry(fn, attempts = 3) {
         catch (e) { if (i === attempts - 1) throw e; }
     }
 }
+
+//custom iterable object 
+const countdown = {
+    from: 5,
+    [Symbol.iterator]() {
+        let current = this.from;
+        return {
+            next: () => ({
+                done: current < 0,
+                value: current--
+            })
+        };
+    }
+};
