@@ -140,4 +140,14 @@ function deepClone(obj) {
         : JSON.parse(JSON.stringify(obj));
 }
 
-// 
+// memorization for expensvie function calls 
+
+function memoize(fn) {
+    const cache = new Map();
+    return function (key) {
+        if (cache.has(key)) return cache.get(key);
+        const result = fn(key);
+        cache.set(key, result);
+        return result;
+    };
+}
