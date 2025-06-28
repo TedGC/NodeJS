@@ -169,3 +169,17 @@ const chain = x => new Proxy({ value: x }, {
         : prop === 'get' ? () => obj.value : undefined)
 });
 console.log(chain(3).sqrt.get()); // Math.sqrt(3)
+
+
+//throttle function 
+
+function throttle(fn, limit) {
+    let inThrottle;
+    return function (...args) {
+        if (!inThrottle) {
+            fn.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => (inThrottle = false), limit);
+        }
+    };
+}
