@@ -160,3 +160,12 @@ function curry(fn) {
             : (...next) => curried.apply(this, args.concat(next));
     };
 }
+
+
+//chainable interface with proxy 
+const chain = x => new Proxy({ value: x }, {
+    get: (obj, prop) => (typeof Math[prop] === 'function'
+        ? chain(Math[prop](obj.value))
+        : prop === 'get' ? () => obj.value : undefined)
+});
+console.log(chain(3).sqrt.get()); // Math.sqrt(3)
