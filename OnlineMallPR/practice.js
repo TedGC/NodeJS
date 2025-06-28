@@ -218,3 +218,10 @@ const countdown = {
         };
     }
 };
+
+
+//pipeline operator (simulated )
+const pipe = (...fns) => x => fns.reduce((v, f) => f(v), x);
+const double = n => n * 2;
+const square = n => n * n;
+console.log(pipe(double, square)(3)); // (3*2)^2 = 36
