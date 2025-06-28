@@ -123,3 +123,21 @@ wss.on('connection', ws => {
         });
     });
 });
+
+// debounce function 
+function debounce(fn, delay) {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+}
+
+// deep clone with structuredclone fallback
+function deepClone(obj) {
+    return typeof structuredClone === 'function'
+        ? structuredClone(obj)
+        : JSON.parse(JSON.stringify(obj));
+}
+
+// 
