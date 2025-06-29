@@ -320,3 +320,26 @@ const a = { x: 1, y: { z: 2 } };
 const b = deepClone(a);
 b.y.z = 100;
 console.log(a.y.z); // 2
+
+
+//chaining methods via class
+
+class Counter {
+    constructor() {
+        this.count = 0;
+    }
+    inc() {
+        this.count++;
+        return this;
+    }
+    dec() {
+        this.count--;
+        return this;
+    }
+    show() {
+        console.log(this.count);
+        return this;
+    }
+}
+
+new Counter().inc().inc().dec().show(); // 1
