@@ -381,3 +381,27 @@ const config = deepFreeze({
         port: 8080
     }
 });
+
+
+//custom event emitter 
+
+class EventEmitter {
+    constructor() {
+        this.events = {};
+    }
+
+    on(event, listener) {
+        if (!this.events[event]) this.events[event] = [];
+        this.events[event].push(listener);
+    }
+
+    emit(event, ...args) {
+        if (this.events[event]) {
+            this.events[event].forEach(fn => fn(...args));
+        }
+    }
+}
+
+const emitter = new EventEmitter();
+emitter.on('msg', text => console.log(`Received: ${text}`));
+emitter.emit('msg', 'Hello World');
