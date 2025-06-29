@@ -361,3 +361,23 @@ const square = x => x * x;
 
 const result = compose(double, square)(3); // square(3) = 9, double(9) = 18
 console.log(result);
+
+
+//object.freeze deep clone 
+
+function deepFreeze(obj) {
+    Object.freeze(obj);
+    for (let key in obj) {
+        if (typeof obj[key] === 'object' && !Object.isFrozen(obj[key])) {
+            deepFreeze(obj[key]);
+        }
+    }
+    return obj;
+}
+
+const config = deepFreeze({
+    server: {
+        host: 'localhost',
+        port: 8080
+    }
+});
