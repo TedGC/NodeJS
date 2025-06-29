@@ -274,3 +274,18 @@ function memoize(fn) {
 
 const factorial = memoize(n => (n <= 1 ? 1 : n * factorial(n - 1)));
 console.log(factorial(5)); // 120
+
+//function debouncing 
+
+function debounce(fn, delay) {
+    let timeout;
+    return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => fn(...args), delay);
+    };
+}
+
+const log = debounce(() => console.log("Debounced!"), 1000);
+log();
+log();
+log(); // Only the last one runs
