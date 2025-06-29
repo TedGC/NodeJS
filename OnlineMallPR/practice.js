@@ -242,3 +242,20 @@ async function* lazyFetch(urls) {
         console.log(item);
     }
 })();
+
+
+//proxy for access logging 
+
+const user = {
+    name: "Ted",
+    role: "admin"
+};
+
+const loggedUser = new Proxy(user, {
+    get(target, prop) {
+        console.log(`Accessed ${prop}`);
+        return target[prop];
+    }
+});
+
+console.log(loggedUser.name); // logs "Accessed name", then outputs "Ted"
