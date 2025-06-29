@@ -343,3 +343,11 @@ class Counter {
 }
 
 new Counter().inc().inc().dec().show(); // 1
+
+//tagged template literals 
+function highlight(strings, ...values) {
+    return strings.reduce((acc, str, i) => acc + str + (values[i] ? `<b>${values[i]}</b>` : ''), '');
+}
+
+const name = "Ted";
+console.log(highlight`Hello, ${name}!`); // Hello, <b>Ted</b>!
