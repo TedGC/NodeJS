@@ -351,3 +351,13 @@ function highlight(strings, ...values) {
 
 const name = "Ted";
 console.log(highlight`Hello, ${name}!`); // Hello, <b>Ted</b>!
+
+//function composition 
+
+const compose = (...fns) => x => fns.reduceRight((acc, fn) => fn(acc), x);
+
+const double = x => x * 2;
+const square = x => x * x;
+
+const result = compose(double, square)(3); // square(3) = 9, double(9) = 18
+console.log(result);
