@@ -289,3 +289,34 @@ const log = debounce(() => console.log("Debounced!"), 1000);
 log();
 log();
 log(); // Only the last one runs
+
+
+
+//async/await with IIFE 
+
+(async () => {
+    const fetchData = async () => {
+        return new Promise(resolve => setTimeout(() => resolve("Done!"), 1000));
+    };
+
+    const result = await fetchData();
+    console.log(result); // Done!
+})();
+
+
+
+//deep clone with recursion 
+
+function deepClone(obj) {
+    if (obj === null || typeof obj !== 'object') return obj;
+    const clone = Array.isArray(obj) ? [] : {};
+    for (const key in obj) {
+        clone[key] = deepClone(obj[key]);
+    }
+    return clone;
+}
+
+const a = { x: 1, y: { z: 2 } };
+const b = deepClone(a);
+b.y.z = 100;
+console.log(a.y.z); // 2
