@@ -405,3 +405,21 @@ class EventEmitter {
 const emitter = new EventEmitter();
 emitter.on('msg', text => console.log(`Received: ${text}`));
 emitter.emit('msg', 'Hello World');
+
+
+//throttle function 
+
+function throttle(fn, limit) {
+    let inThrottle;
+    return (...args) => {
+        if (!inThrottle) {
+            fn(...args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+const log = () => console.log('Throttled!');
+const throttledLog = throttle(log, 2000);
+window.addEventListener('scroll', throttledLog);
