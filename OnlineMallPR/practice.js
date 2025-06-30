@@ -485,3 +485,20 @@ const square = x => x * x;
 
 const doubleThenSquare = compose(square, double);
 console.log(doubleThenSquare(5)); // 100
+
+//reactive proxy object
+function reactive(obj, onChange) {
+    return new Proxy(obj, {
+        set(target, prop, value) {
+            target[prop] = value;
+            onChange(prop, value);
+            return true;
+        }
+    });
+}
+
+const state = reactive({ count: 0 }, (key, value) =>
+    console.log(`${key} changed to ${value}`)
+);
+
+state.count = 5;
