@@ -423,3 +423,38 @@ function throttle(fn, limit) {
 const log = () => console.log('Throttled!');
 const throttledLog = throttle(log, 2000);
 window.addEventListener('scroll', throttledLog);
+
+function debounce(fn, delay, immediate = false) {
+    let timer;
+    return function (...args) {
+        const callNow = immediate && !timer;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            timer = null;
+            if (!immediate) fn.apply(this, args);
+        }, delay);
+        if (callNow) fn.apply(this, args);
+    };
+}
+
+// Usage
+const log = debounce(() => console.log("Debounced!"), 1000, true);
+log(); log(); log(); // Only first call trigger
+
+// custom debounce with immediate trigger
+function debounce(fn, delay, immediate = false) {
+    let timer;
+    return function (...args) {
+        const callNow = immediate && !timer;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            timer = null;
+            if (!immediate) fn.apply(this, args);
+        }, delay);
+        if (callNow) fn.apply(this, args);
+    };
+}
+
+// Usage
+const log = debounce(() => console.log("Debounced!"), 1000, true);
+log(); log(); log(); // Only first call trigger
