@@ -576,3 +576,22 @@ class Chain {
 }
 
 new Chain(2).add(3).multiply(5).print(); // 25
+
+
+// custom iterator for fibonacci sequence 
+const fibonacci = {
+    [Symbol.iterator]() {
+        let [a, b] = [0, 1];
+        return {
+            next() {
+                [a, b] = [b, a + b];
+                return { value: a, done: false };
+            }
+        };
+    }
+};
+
+const fib = fibonacci[Symbol.iterator]();
+console.log(fib.next().value); // 1
+console.log(fib.next().value); // 2
+console.log(fib.next().value); // 3
