@@ -551,3 +551,28 @@ async function asyncPool(poolLimit, tasks, taskFn) {
     }
     return Promise.all(ret);
 }
+
+
+//chainable API
+class Chain {
+    constructor(val) {
+        this.val = val;
+    }
+
+    add(x) {
+        this.val += x;
+        return this;
+    }
+
+    multiply(x) {
+        this.val *= x;
+        return this;
+    }
+
+    print() {
+        console.log(this.val);
+        return this;
+    }
+}
+
+new Chain(2).add(3).multiply(5).print(); // 25
