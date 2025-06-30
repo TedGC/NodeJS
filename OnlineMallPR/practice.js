@@ -595,3 +595,19 @@ const fib = fibonacci[Symbol.iterator]();
 console.log(fib.next().value); // 1
 console.log(fib.next().value); // 2
 console.log(fib.next().value); // 3
+
+
+// object flattening 
+function flattenObject(obj, parent = '', res = {}) {
+    for (let key in obj) {
+        const prop = parent ? `${parent}.${key}` : key;
+        if (typeof obj[key] === 'object' && obj[key] !== null)
+            flattenObject(obj[key], prop, res);
+        else
+            res[prop] = obj[key];
+    }
+    return res;
+}
+
+console.log(flattenObject({ a: { b: 2 }, c: 3 }));
+// { 'a.b': 2, c: 3 }
