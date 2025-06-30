@@ -522,3 +522,13 @@ const Singleton = (function () {
 const a = Singleton.getInstance();
 const b = Singleton.getInstance();
 console.log(a === b); // true
+
+//tagged template literal parser 
+function highlight(strings, ...values) {
+    return strings.reduce((acc, str, i) => {
+        return acc + str + (values[i] ? `<mark>${values[i]}</mark>` : '');
+    }, '');
+}
+
+const name = "Ted";
+console.log(highlight`Hello, ${name}!`); // Hello, <mark>Ted</mark>!
