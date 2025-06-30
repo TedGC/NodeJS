@@ -532,3 +532,22 @@ function highlight(strings, ...values) {
 
 const name = "Ted";
 console.log(highlight`Hello, ${name}!`); // Hello, <mark>Ted</mark>!
+
+
+// async pool (concurrency control)
+async function asyncPool(poolLimit, tasks, taskFn) {
+    const ret = [];
+    const executing = [];
+
+    for (const task of tasks) {
+        const p = Promise.resolve().then(() => taskFn(task));
+        ret.push(p);
+
+        if (poolLimit <= tasks.length) {
+            const e = p.then(() => executing.splice(executing.indexOf(e), 1));
+            executing.push(e);
+            if (executing.length >= poolLimit) await Promise.race(executing);
+        }
+    }
+    return Promise.all(ret);
+}
