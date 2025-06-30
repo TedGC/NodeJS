@@ -502,3 +502,23 @@ const state = reactive({ count: 0 }, (key, value) =>
 );
 
 state.count = 5;
+
+//lazy singleton pattern
+const Singleton = (function () {
+    let instance;
+
+    function createInstance() {
+        return { timestamp: Date.now() };
+    }
+
+    return {
+        getInstance() {
+            if (!instance) instance = createInstance();
+            return instance;
+        }
+    };
+})();
+
+const a = Singleton.getInstance();
+const b = Singleton.getInstance();
+console.log(a === b); // true
