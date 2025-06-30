@@ -474,3 +474,14 @@ function deepClone(obj, hash = new WeakMap()) {
 
     return clone;
 }
+
+
+//function composition 
+const compose = (...fns) => (x) =>
+    fns.reduceRight((v, f) => f(v), x);
+
+const double = x => x * 2;
+const square = x => x * x;
+
+const doubleThenSquare = compose(square, double);
+console.log(doubleThenSquare(5)); // 100
