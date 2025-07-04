@@ -701,3 +701,20 @@ function sum(a) {
 }
 
 console.log(+sum(1)(2)(3)); // 6
+
+
+//Proxy-Based Property Access Logger
+
+const user = {
+    name: 'Alice',
+    age: 25
+};
+
+const proxy = new Proxy(user, {
+    get(target, prop) {
+        console.log(`Accessed ${prop}`);
+        return Reflect.get(target, prop);
+    }
+});
+
+console.log(proxy.name); // Logs: Accessed name
