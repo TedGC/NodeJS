@@ -735,3 +735,18 @@ function multiply(a, b, c) {
 
 const curried = curry(multiply);
 console.log(curried(2)(3)(4)); // 24
+
+//Debounce (No Call Until Stable)
+
+
+function debounce(fn, delay) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(...args), delay);
+    };
+}
+
+window.addEventListener('resize', debounce(() => {
+    console.log('Resized');
+}, 300));
