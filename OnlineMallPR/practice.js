@@ -718,3 +718,20 @@ const proxy = new Proxy(user, {
 });
 
 console.log(proxy.name); // Logs: Accessed name
+
+
+//Currying with Dynamic Args
+
+function curry(fn) {
+    return function curried(...args) {
+        if (args.length >= fn.length) return fn(...args);
+        return (...next) => curried(...args, ...next);
+    };
+}
+
+function multiply(a, b, c) {
+    return a * b * c;
+}
+
+const curried = curry(multiply);
+console.log(curried(2)(3)(4)); // 24
