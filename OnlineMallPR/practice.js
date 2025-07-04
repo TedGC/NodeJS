@@ -687,3 +687,17 @@ class EventEmitter {
 const emitter = new EventEmitter();
 emitter.on('sayHi', name => console.log(`Hi ${name}`));
 emitter.emit('sayHi', 'Ted');
+
+
+//Chained Function Calls with State
+function sum(a) {
+    let total = a;
+    const f = b => {
+        total += b;
+        return f;
+    };
+    f.valueOf = () => total;
+    return f;
+}
+
+console.log(+sum(1)(2)(3)); // 6
