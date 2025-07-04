@@ -611,3 +611,19 @@ function flattenObject(obj, parent = '', res = {}) {
 
 console.log(flattenObject({ a: { b: 2 }, c: 3 }));
 // { 'a.b': 2, c: 3 }
+
+// Recursive Object Search
+
+function deepSearch(obj, targetKey) {
+    if (obj.hasOwnProperty(targetKey)) return obj[targetKey];
+    for (const key in obj) {
+        if (typeof obj[key] === 'object') {
+            const result = deepSearch(obj[key], targetKey);
+            if (result) return result;
+        }
+    }
+    return undefined;
+}
+
+const data = { a: { b: { c: 42 } } };
+console.log(deepSearch(data, 'c')); // 42
