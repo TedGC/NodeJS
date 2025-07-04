@@ -765,3 +765,23 @@ async function asyncMap(arr, fn) {
 
 asyncMap([1, 2, 3], async x => x * 2)
     .then(console.log); // [2, 4, 6]
+
+
+
+//Retry Logic with Backoff
+
+async function retry(fn, attempts = 3, delay = 1000) {
+    for (let i = 0; i < attempts; i++) {
+        try {
+            return await fn();
+        } catch (err) {
+            if (i === attempts - 1) throw err;
+            await new Promise(res => setTimeout(res, delay));
+        }
+    }
+}
+
+// Example usage
+retry(() => fetch('https://api.example.com'), 5, 500)
+    .then(res => console.log('Success'))
+    .catch(err => console.error('Failed after 5 retries'));
