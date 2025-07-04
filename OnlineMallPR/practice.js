@@ -664,3 +664,26 @@ function memoize(fn, timeout = 5000) {
 
 const add = memoize((a, b) => a + b);
 console.log(add(2, 3)); // 5
+
+
+
+// Custom Event Emitter
+
+class EventEmitter {
+    constructor() {
+        this.events = {};
+    }
+
+    on(event, fn) {
+        this.events[event] = this.events[event] || [];
+        this.events[event].push(fn);
+    }
+
+    emit(event, ...args) {
+        (this.events[event] || []).forEach(fn => fn(...args));
+    }
+}
+
+const emitter = new EventEmitter();
+emitter.on('sayHi', name => console.log(`Hi ${name}`));
+emitter.emit('sayHi', 'Ted');
