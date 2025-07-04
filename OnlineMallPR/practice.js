@@ -625,5 +625,18 @@ function deepSearch(obj, targetKey) {
     return undefined;
 }
 
+
+//Lazy Evaluation with Generator
 const data = { a: { b: { c: 42 } } };
 console.log(deepSearch(data, 'c')); // 42
+
+
+function* infiniteRandom() {
+    while (true) {
+        yield Math.random();
+    }
+}
+
+const randGen = infiniteRandom();
+console.log(randGen.next().value);
+console.log(randGen.next().value);
