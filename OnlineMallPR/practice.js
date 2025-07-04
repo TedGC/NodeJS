@@ -640,3 +640,27 @@ function* infiniteRandom() {
 const randGen = infiniteRandom();
 console.log(randGen.next().value);
 console.log(randGen.next().value);
+
+
+
+//Function Memoization with Cache Expiry
+
+function memoize(fn, timeout = 5000) {
+    const cache = new Map();
+    return (...args) => {
+        const key = JSON.stringify(args);
+        const now = Date.now();
+
+        if (cache.has(key)) {
+            const [val, time] = cache.get(key);
+            if (now - time < timeout) return val;
+        }
+
+        const result = fn(...args);
+        cache.set(key, [result, now]);
+        return result;
+    };
+}
+
+const add = memoize((a, b) => a + b);
+console.log(add(2, 3)); // 5
