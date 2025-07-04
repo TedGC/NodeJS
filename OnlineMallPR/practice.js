@@ -750,3 +750,18 @@ function debounce(fn, delay) {
 window.addEventListener('resize', debounce(() => {
     console.log('Resized');
 }, 300));
+
+
+
+
+//Asynchronous Sequential Mapping
+async function asyncMap(arr, fn) {
+    const results = [];
+    for (const item of arr) {
+        results.push(await fn(item));
+    }
+    return results;
+}
+
+asyncMap([1, 2, 3], async x => x * 2)
+    .then(console.log); // [2, 4, 6]
