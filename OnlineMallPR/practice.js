@@ -861,3 +861,12 @@ const user = { id: 1, name: 'Ted' };
 const token = jwt.sign(user, 'mysecretkey', { expiresIn: '1h' });
 
 console.log('JWT:', token);
+
+
+
+import express from 'express';
+const app = express();
+const router = express.Router();
+
+router.get('/products', (req, res) => res.json(['item1', 'item2']));
+app.use('/api', router);
