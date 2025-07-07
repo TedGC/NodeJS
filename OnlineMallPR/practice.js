@@ -815,3 +815,14 @@ async function readFileAsync(path) {
     }
 }
 readFileAsync('./data.txt');
+
+
+
+import express from 'express';
+import multer from 'multer';
+const app = express();
+const upload = multer({ dest: 'uploads/' });
+
+app.post('/upload', upload.single('image'), (req, res) => {
+    res.send('File uploaded');
+});
