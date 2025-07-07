@@ -834,3 +834,13 @@ const app = express();
 app.use(express.static('public')); // serve files from /public
 
 app.listen(3000);
+
+
+import fs from 'fs';
+
+const writeStream = fs.createWriteStream('output.txt');
+
+for (let i = 0; i < 10; i++) {
+    writeStream.write(`Line ${i}\n`);
+}
+writeStream.end();
