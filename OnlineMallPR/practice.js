@@ -802,3 +802,16 @@ app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
     next(); // pass control to the next middleware
 });
+
+
+import fs from 'fs/promises';
+
+async function readFileAsync(path) {
+    try {
+        const data = await fs.readFile(path, 'utf-8');
+        console.log(data);
+    } catch (err) {
+        console.error('Error reading file:', err);
+    }
+}
+readFileAsync('./data.txt');
