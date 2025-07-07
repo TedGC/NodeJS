@@ -826,3 +826,11 @@ const upload = multer({ dest: 'uploads/' });
 app.post('/upload', upload.single('image'), (req, res) => {
     res.send('File uploaded');
 });
+
+
+import express from 'express';
+const app = express();
+
+app.use(express.static('public')); // serve files from /public
+
+app.listen(3000);
