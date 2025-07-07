@@ -853,3 +853,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 console.log('Running on port:', process.env.PORT);
+
+
+import jwt from 'jsonwebtoken';
+
+const user = { id: 1, name: 'Ted' };
+const token = jwt.sign(user, 'mysecretkey', { expiresIn: '1h' });
+
+console.log('JWT:', token);
