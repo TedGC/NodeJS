@@ -870,3 +870,10 @@ const router = express.Router();
 
 router.get('/products', (req, res) => res.json(['item1', 'item2']));
 app.use('/api', router);
+
+
+import cron from 'node-cron';
+
+cron.schedule('*/5 * * * * *', () => {
+    console.log('Running every 5 seconds');
+});
