@@ -844,3 +844,12 @@ for (let i = 0; i < 10; i++) {
     writeStream.write(`Line ${i}\n`);
 }
 writeStream.end();
+
+
+// .env
+// PORT=4000
+
+import dotenv from 'dotenv';
+dotenv.config();
+
+console.log('Running on port:', process.env.PORT);
