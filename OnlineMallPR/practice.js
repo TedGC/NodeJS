@@ -785,3 +785,14 @@ async function retry(fn, attempts = 3, delay = 1000) {
 retry(() => fetch('https://api.example.com'), 5, 500)
     .then(res => console.log('Success'))
     .catch(err => console.error('Failed after 5 retries'));
+
+
+
+import express from 'express';
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hello from Node.js!');
+});
+
+app.listen(3000, () => console.log('Server running on port 3000'));
