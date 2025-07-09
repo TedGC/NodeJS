@@ -937,3 +937,9 @@ app.use(logger);
 app.get('/', (req, res) => res.send('Hello'));
 
 app.listen(3000);
+
+
+
+//Create a Simple CLI Tool
+const args = process.argv.slice(2);
+console.log(`Hello, ${args[0] || 'World'}!`);
