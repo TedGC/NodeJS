@@ -988,3 +988,17 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(3000);
+
+
+// HTTP Request Using Axios
+
+
+const axios = require('axios');
+
+axios.get('https://api.github.com/users/octocat')
+    .then(response => {
+        console.log(response.data);
+    })
+    .catch(error => {
+        console.error(error);
+    });
