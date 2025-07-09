@@ -972,3 +972,19 @@ async function readFile() {
 }
 
 readFile();
+
+
+//Custom Error Handler in Express
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+    throw new Error('Something went wrong!');
+});
+
+app.use((err, req, res, next) => {
+    res.status(500).send({ error: err.message });
+});
+
+app.listen(3000);
