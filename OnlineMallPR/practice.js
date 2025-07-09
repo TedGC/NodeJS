@@ -943,3 +943,14 @@ app.listen(3000);
 //Create a Simple CLI Tool
 const args = process.argv.slice(2);
 console.log(`Hello, ${args[0] || 'World'}!`);
+
+
+
+//MongoDB Connection with Mongoose
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/testdb', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => console.log('MongoDB connected'))
+    .catch(err => console.log(err));
