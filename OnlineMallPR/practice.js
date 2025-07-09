@@ -877,3 +877,20 @@ import cron from 'node-cron';
 cron.schedule('*/5 * * * * *', () => {
     console.log('Running every 5 seconds');
 });
+
+
+
+//  Basic REST API with Express
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.get('/api', (req, res) => {
+    res.send('API is running');
+});
+
+app.post('/api/data', (req, res) => {
+    res.json({ received: req.body });
+});
+
+app.listen(3000, () => console.log('Server on port 3000'));
