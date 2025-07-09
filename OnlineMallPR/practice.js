@@ -905,8 +905,19 @@ const token = jwt.sign(user, 'secretKey', { expiresIn: '1h' });
 console.log(token);
 
 
-
+//EventEmitter Example
 const fs = require('fs');
 fs.writeFileSync('example.txt', 'Hello Node.js');
 const data = fs.readFileSync('example.txt', 'utf-8');
 console.log(data);
+
+
+
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
+
+emitter.on('greet', (name) => {
+    console.log(`Hello, ${name}`);
+});
+
+emitter.emit('greet', 'Node.js');
