@@ -921,3 +921,19 @@ emitter.on('greet', (name) => {
 });
 
 emitter.emit('greet', 'Node.js');
+
+
+// Create a Middleware Function
+function logger(req, res, next) {
+    console.log(`${req.method} ${req.url}`);
+    next();
+}
+
+const express = require('express');
+const app = express();
+
+app.use(logger);
+
+app.get('/', (req, res) => res.send('Hello'));
+
+app.listen(3000);
