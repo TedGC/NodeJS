@@ -898,8 +898,15 @@ app.post('/api/data', (req, res) => {
 app.listen(3000, () => console.log('Server on port 3000'));
 
 
-
+// Reading and Writing Files
 const jwt = require('jsonwebtoken');
 const user = { id: 1, username: 'admin' };
 const token = jwt.sign(user, 'secretKey', { expiresIn: '1h' });
 console.log(token);
+
+
+
+const fs = require('fs');
+fs.writeFileSync('example.txt', 'Hello Node.js');
+const data = fs.readFileSync('example.txt', 'utf-8');
+console.log(data);
