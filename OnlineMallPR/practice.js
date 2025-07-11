@@ -1052,3 +1052,18 @@ const validator = {
 const proxyUser = new Proxy(user, validator);
 proxyUser.age = 30;  // OK
 // proxyUser.age = 'thirty'; // Error!
+
+
+
+//generator for infinite sequence 
+
+function* idGenerator() {
+    let id = 0;
+    while (true) {
+        yield ++id;
+    }
+}
+
+const gen = idGenerator();
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
