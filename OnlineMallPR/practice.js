@@ -1067,3 +1067,18 @@ function* idGenerator() {
 const gen = idGenerator();
 console.log(gen.next().value); // 1
 console.log(gen.next().value); // 2
+
+
+//deboucne implementation 
+
+function debounce(fn, delay) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(...args), delay);
+    };
+}
+
+window.addEventListener('resize', debounce(() => {
+    console.log('Resized!');
+}, 500));
