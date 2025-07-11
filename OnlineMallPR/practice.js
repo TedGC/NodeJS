@@ -1121,3 +1121,19 @@ class EventEmitter {
 const emitter = new EventEmitter();
 emitter.on('greet', name => console.log(`Hello, ${name}!`));
 emitter.emit('greet', 'Ted');
+
+
+//async/await with timeout fallback
+
+async function fetchWithTimeout(url, ms) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), ms);
+
+    try {
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeout);
+        return response.json();
+    } catch (err) {
+        console.error('Request timed out or failed', err);
+    }
+}
