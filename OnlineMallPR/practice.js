@@ -1137,3 +1137,32 @@ async function fetchWithTimeout(url, ms) {
         console.error('Request timed out or failed', err);
     }
 }
+
+//LRU cache implementation 
+
+class LRUCache {
+    constructor(limit = 3) {
+        this.cache = new Map();
+        this.limit = limit;
+    }
+
+    get(key) {
+        if (!this.cache.has(key)) return null;
+        const value = this.cache.get(key);
+        this.cache.delete(key);
+        this.cache.set(key, value);
+        return value;
+    }
+
+    set(key, value) {
+        if (this.cache.has(key)) this.cache.delete(key);
+        else if (this.cache.size === this.limit) this.cache.delete(this.cache.keys().next().value);
+        this.cache.set(key, value);
+    }
+}
+
+const lru = new LRUCache();
+lru.set('a', 1); lru.set('b', 2); lru.set('c', 3);
+lru.get('a');
+lru.set('d', 4);
+console.log([...lru.cache.keys()]); // [ 'c', 'a', 'd' ]
