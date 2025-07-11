@@ -1029,3 +1029,26 @@ function memoize(fn) {
 const slowAdd = (a, b) => a + b;
 const fastAdd = memoize(slowAdd);
 console.log(fastAdd(2, 3)); // 5
+
+
+
+//proxy for dynamic validation 
+
+const user = {
+    name: 'Alice',
+    age: 25
+};
+
+const validator = {
+    set(target, prop, value) {
+        if (prop === 'age' && typeof value !== 'number') {
+            throw new Error('Age must be a number');
+        }
+        target[prop] = value;
+        return true;
+    }
+};
+
+const proxyUser = new Proxy(user, validator);
+proxyUser.age = 30;  // OK
+// proxyUser.age = 'thirty'; // Error!
