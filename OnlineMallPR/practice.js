@@ -1082,3 +1082,21 @@ function debounce(fn, delay) {
 window.addEventListener('resize', debounce(() => {
     console.log('Resized!');
 }, 500));
+
+
+//throttle implementation 
+
+function throttle(fn, limit) {
+    let waiting = false;
+    return (...args) => {
+        if (!waiting) {
+            fn(...args);
+            waiting = true;
+            setTimeout(() => waiting = false, limit);
+        }
+    };
+}
+
+window.addEventListener('scroll', throttle(() => {
+    console.log('Scroll event!');
+}, 1000));
