@@ -1166,3 +1166,53 @@ lru.set('a', 1); lru.set('b', 2); lru.set('c', 3);
 lru.get('a');
 lru.set('d', 4);
 console.log([...lru.cache.keys()]); // [ 'c', 'a', 'd' ]
+
+
+
+
+function deepMerge(target, source) {
+    for (const key in source) {
+        if (
+            source.hasOwnProperty(key) &&
+            typeof source[key] === 'object' &&
+            source[key] !== null &&
+            !Array.isArray(source[key])
+        ) {
+            if (!target[key] || typeof target[key] !== 'object') {
+                target[key] = {};
+            }
+            deepMerge(target[key], source[key]);
+        } else {
+            target[key] = source[key];
+        }
+    }
+    return target;
+}
+
+// Example usage:
+const obj1 = {
+    user: {
+        name: 'Ted',
+        preferences: { theme: 'dark' }
+    }
+};
+
+const obj2 = {
+    user: {
+        preferences: { notifications: true },
+        age: 28
+    }
+};
+
+const merged = deepMerge(obj1, obj2);
+
+console.log(merged);
+/*
+{
+  user: {
+    name: 'Ted',
+    preferences: { theme: 'dark', notifications: true },
+    age: 28
+  }
+}
+*/
