@@ -1100,3 +1100,24 @@ function throttle(fn, limit) {
 window.addEventListener('scroll', throttle(() => {
     console.log('Scroll event!');
 }, 1000));
+
+
+//custom eventEmitter class
+
+class EventEmitter {
+    constructor() {
+        this.events = {};
+    }
+
+    on(event, fn) {
+        (this.events[event] = this.events[event] || []).push(fn);
+    }
+
+    emit(event, ...args) {
+        (this.events[event] || []).forEach(fn => fn(...args));
+    }
+}
+
+const emitter = new EventEmitter();
+emitter.on('greet', name => console.log(`Hello, ${name}!`));
+emitter.emit('greet', 'Ted');
