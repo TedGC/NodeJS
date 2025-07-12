@@ -1303,3 +1303,16 @@ async function retry(fn, retries = 3, delay = 500) {
 
 // Usage
 retry(() => fetch('https://api.example.com')).catch(console.error);
+
+
+const curry = (fn) =>
+    function curried(...args) {
+        return args.length >= fn.length
+            ? fn.apply(this, args)
+            : (...next) => curried.apply(this, args.concat(next));
+    };
+
+const sum = (a, b, c) => a + b + c;
+const curriedSum = curry(sum);
+
+console.log(curriedSum(1)(2)(3)); // 6
