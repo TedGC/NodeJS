@@ -1254,3 +1254,13 @@ promisePool(tasks, 3).then(console.log);
         console.log('Module failed, fallback!');
     }
 })();
+
+
+const compose = (...fns) => (val) =>
+    fns.reduceRight((acc, fn) => fn(acc), val);
+
+const add2 = (x) => x + 2;
+const mul3 = (x) => x * 3;
+
+const composed = compose(mul3, add2);
+console.log(composed(4)); // (4 + 2) * 3 = 18
