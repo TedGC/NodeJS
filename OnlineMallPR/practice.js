@@ -1341,3 +1341,21 @@ class Calculator {
 
 const calc = new Calculator();
 console.log(calc.add(5).multiply(2).result()); // 10
+
+
+
+const countdown = {
+    from: 3,
+    [Symbol.iterator]() {
+        let i = this.from;
+        return {
+            next() {
+                return i >= 0 ? { value: i--, done: false } : { done: true };
+            }
+        };
+    }
+};
+
+for (const num of countdown) {
+    console.log(num); // 3, 2, 1, 0
+}
