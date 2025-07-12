@@ -1359,3 +1359,15 @@ const countdown = {
 for (const num of countdown) {
     console.log(num); // 3, 2, 1, 0
 }
+
+
+
+
+function highlight(strings, ...values) {
+    return strings.reduce((acc, str, i) =>
+        `${acc}${str}<b>${values[i] || ''}</b>`, '');
+}
+
+const name = 'Ted';
+const message = highlight`Hello, ${name}!`;
+console.log(message); // Hello, <b>Ted</b>!
