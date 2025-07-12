@@ -1264,3 +1264,27 @@ const mul3 = (x) => x * 3;
 
 const composed = compose(mul3, add2);
 console.log(composed(4)); // (4 + 2) * 3 = 18
+
+
+
+const user = {
+    name: 'Ted',
+    age: 25
+};
+
+const proxy = new Proxy(user, {
+    get(target, prop) {
+        console.log(`Accessing ${prop}`);
+        return target[prop];
+    },
+    set(target, prop, value) {
+        if (prop === 'age' && typeof value !== 'number') {
+            throw new Error('Age must be a number');
+        }
+        target[prop] = value;
+        return true;
+    }
+});
+
+proxy.age = 30; // ok
+// proxy.age = 'old'; // error
