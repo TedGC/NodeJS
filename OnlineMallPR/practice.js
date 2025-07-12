@@ -1243,3 +1243,14 @@ const tasks = Array.from({ length: 10 }, (_, i) =>
     () => new Promise(res => setTimeout(() => res(i), 1000))
 );
 promisePool(tasks, 3).then(console.log);
+
+
+
+(async () => {
+    try {
+        const module = await import('./feature.js');
+        module.run();
+    } catch (err) {
+        console.log('Module failed, fallback!');
+    }
+})();
