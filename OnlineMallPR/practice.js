@@ -1316,3 +1316,28 @@ const sum = (a, b, c) => a + b + c;
 const curriedSum = curry(sum);
 
 console.log(curriedSum(1)(2)(3)); // 6
+
+
+
+class Calculator {
+    constructor(value = 0) {
+        this.value = value;
+    }
+
+    add(n) {
+        this.value += n;
+        return this;
+    }
+
+    multiply(n) {
+        this.value *= n;
+        return this;
+    }
+
+    result() {
+        return this.value;
+    }
+}
+
+const calc = new Calculator();
+console.log(calc.add(5).multiply(2).result()); // 10
