@@ -1371,3 +1371,20 @@ function highlight(strings, ...values) {
 const name = 'Ted';
 const message = highlight`Hello, ${name}!`;
 console.log(message); // Hello, <b>Ted</b>!
+
+
+
+function deepFreeze(obj) {
+    Object.freeze(obj);
+    for (const key of Object.getOwnPropertyNames(obj)) {
+        if (typeof obj[key] === 'object' && !Object.isFrozen(obj[key])) {
+            deepFreeze(obj[key]);
+        }
+    }
+    return obj;
+}
+
+const config = deepFreeze({
+    db: { host: 'localhost', port: 3306 },
+    app: { name: 'MyApp' }
+}); s
