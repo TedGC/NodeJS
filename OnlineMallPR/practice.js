@@ -1461,3 +1461,23 @@ for (const num of range) {
             }
         }
     }
+
+
+    const user = {
+        name: 'Alice',
+        age: 25
+    };
+
+    const validator = {
+        set(obj, prop, value) {
+            if (prop === 'age' && typeof value !== 'number') {
+                throw new TypeError('Age must be a number');
+            }
+            obj[prop] = value;
+            return true;
+        }
+    };
+
+    const proxyUser = new Proxy(user, validator);
+    proxyUser.age = 30;
+// proxyUser.age = 'old'; // ❌ Throws error
