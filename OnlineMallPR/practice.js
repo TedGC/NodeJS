@@ -1388,3 +1388,16 @@ const config = deepFreeze({
     db: { host: 'localhost', port: 3306 },
     app: { name: 'MyApp' }
 }); s
+
+
+
+function debounce(fn, delay) {
+    let timeoutId;
+    return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => fn.apply(this, args), delay);
+    };
+}
+
+// Usage
+window.addEventListener('resize', debounce(() => console.log('Resized!'), 300))
