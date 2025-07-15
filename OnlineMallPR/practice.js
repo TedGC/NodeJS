@@ -1430,3 +1430,21 @@ function* infiniteEvenNumbers() {
 const gen = infiniteEvenNumbers();
 console.log(gen.next().value); // 0
 console.log(gen.next().value); // 2
+
+
+const range = {
+    from: 1,
+    to: 5,
+    [Symbol.iterator]() {
+        let current = this.from;
+        return {
+            next: () => ({
+                done: current > this.to,
+                value: current++
+            })
+        };
+    }
+};
+
+for (const num of range) {
+    console.log(num); // 1 to 5
