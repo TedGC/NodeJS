@@ -1493,3 +1493,17 @@ for (const num of range) {
     const multiply = (a, b, c) => a * b * c;
     const curriedMultiply = curry(multiply);
     console.log(curriedMultiply(2)(3)(4)); // 24
+
+
+
+    function debounce(fn, delay) {
+        let timer;
+        return function (...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => fn.apply(this, args), delay);
+        };
+    }
+
+    window.addEventListener('resize', debounce(() => {
+        console.log('Resized!');
+    }, 300));
