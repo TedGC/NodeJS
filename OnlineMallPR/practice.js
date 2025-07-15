@@ -1448,3 +1448,16 @@ const range = {
 
 for (const num of range) {
     console.log(num); // 1 to 5
+
+
+    async function retry(fn, times = 3, delay = 1000) {
+        while (times > 0) {
+            try {
+                return await fn();
+            } catch (err) {
+                times--;
+                if (times === 0) throw err;
+                await new Promise(res => setTimeout(res, delay));
+            }
+        }
+    }
