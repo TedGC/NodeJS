@@ -1507,3 +1507,22 @@ for (const num of range) {
     window.addEventListener('resize', debounce(() => {
         console.log('Resized!');
     }, 300));
+
+
+    class EventEmitter {
+        constructor() {
+            this.events = {};
+        }
+
+        on(event, listener) {
+            (this.events[event] ||= []).push(listener);
+        }
+
+        emit(event, ...args) {
+            (this.events[event] || []).forEach(fn => fn(...args));
+        }
+    }
+
+    const emitter = new EventEmitter();
+    emitter.on('log', msg => console.log(msg));
+    emitter.emit('log', 'Event emitted!');
