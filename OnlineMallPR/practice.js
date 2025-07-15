@@ -1480,4 +1480,16 @@ for (const num of range) {
 
     const proxyUser = new Proxy(user, validator);
     proxyUser.age = 30;
-// proxyUser.age = 'old'; // ❌ Throws error
+    // proxyUser.age = 'old'; // ❌ Throws error
+
+    function curry(fn) {
+        return function curried(...args) {
+            return args.length >= fn.length
+                ? fn.apply(this, args)
+                : (...rest) => curried.apply(this, args.concat(rest));
+        };
+    }
+
+    const multiply = (a, b, c) => a * b * c;
+    const curriedMultiply = curry(multiply);
+    console.log(curriedMultiply(2)(3)(4)); // 24
