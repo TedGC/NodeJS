@@ -1526,3 +1526,13 @@ for (const num of range) {
     const emitter = new EventEmitter();
     emitter.on('log', msg => console.log(msg));
     emitter.emit('log', 'Event emitted!');
+
+
+    function bold(strings, ...values) {
+        return strings.reduce((str, curr, i) => {
+            return str + curr + (values[i] ? `<b>${values[i]}</b>` : '');
+        }, '');
+    }
+
+    const name = 'Ted';
+    console.log(bold`Hello, ${name}!`);
