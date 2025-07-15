@@ -1417,3 +1417,16 @@ function memoize(fn) {
 // Usage
 const fib = memoize(n => n <= 1 ? n : fib(n - 1) + fib(n - 2));
 console.log(fib(40));
+
+
+function* infiniteEvenNumbers() {
+    let n = 0;
+    while (true) {
+        yield n;
+        n += 2;
+    }
+}
+
+const gen = infiniteEvenNumbers();
+console.log(gen.next().value); // 0
+console.log(gen.next().value); // 2
