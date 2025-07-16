@@ -1597,3 +1597,26 @@ for (const num of range) {
     const double = x => x * 2;
 
     const result = pipe(add, double)(3); // (3+1)*2 = 8
+
+
+    class AsyncQueue {
+        constructor() {
+            this.queue = [];
+            this.running = false;
+        }
+
+        enqueue(task) {
+            this.queue.push(task);
+            this.run();
+        }
+
+        async run() {
+            if (this.running) return;
+            this.running = true;
+            while (this.queue.length) {
+                const task = this.queue.shift();
+                await task();
+            }
+            this.running = false;
+        }
+    }
