@@ -1568,3 +1568,16 @@ for (const num of range) {
             }
         };
     }
+
+
+
+    const user = { name: "Ted", age: 30 };
+
+    const proxy = new Proxy(user, {
+        get(target, prop) {
+            console.log(`Accessing ${prop}`);
+            return target[prop];
+        }
+    });
+
+    console.log(proxy.name); // Logs: Accessing name → Ted
