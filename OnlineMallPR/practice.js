@@ -1620,3 +1620,19 @@ for (const num of range) {
             this.running = false;
         }
     }
+
+
+    function observe(obj, callback) {
+        return new Proxy(obj, {
+            set(target, key, value) {
+                callback(key, value);
+                target[key] = value;
+                return true;
+            }
+        });
+    }
+
+    const state = observe({ count: 0 }, (key, value) => {
+        console.log(`Changed ${key} to ${value}`);
+    });
+    state.count = 1; // Logs: Changed count to 1
