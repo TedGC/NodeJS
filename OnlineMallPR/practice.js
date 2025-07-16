@@ -1581,3 +1581,12 @@ for (const num of range) {
     });
 
     console.log(proxy.name); // Logs: Accessing name → Ted
+
+
+
+    function* lazyRange(start, end) {
+        for (let i = start; i <= end; i++) yield i;
+    }
+
+    const range = lazyRange(1, 3);
+    console.log([...range]); // [1, 2, 3]
