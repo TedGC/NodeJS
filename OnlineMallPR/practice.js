@@ -1590,3 +1590,10 @@ for (const num of range) {
 
     const range = lazyRange(1, 3);
     console.log([...range]); // [1, 2, 3]
+
+
+    const pipe = (...fns) => input => fns.reduce((v, f) => f(v), input);
+    const add = x => x + 1;
+    const double = x => x * 2;
+
+    const result = pipe(add, double)(3); // (3+1)*2 = 8
