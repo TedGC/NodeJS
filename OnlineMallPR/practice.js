@@ -1648,3 +1648,14 @@ for (const num of range) {
 
     const multiply = logExecution((a, b) => a * b);
     console.log(multiply(2, 3)); // Logs input and result
+
+
+
+    (async () => {
+        if (Math.random() > 0.5) {
+            const { default: _ } = await import('lodash');
+            console.log(_.shuffle([1, 2, 3, 4]));
+        } else {
+            console.log('Skipped lodash');
+        }
+    })();
