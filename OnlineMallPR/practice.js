@@ -1555,3 +1555,16 @@ for (const num of range) {
         };
     }
     console.log(sum(1)(2)(3)(4)()); // 10
+
+
+
+    function throttle(fn, delay) {
+        let shouldWait = false;
+        return function (...args) {
+            if (!shouldWait) {
+                fn.apply(this, args);
+                shouldWait = true;
+                setTimeout(() => shouldWait = false, delay);
+            }
+        };
+    }
