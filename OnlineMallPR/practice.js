@@ -1636,3 +1636,15 @@ for (const num of range) {
         console.log(`Changed ${key} to ${value}`);
     });
     state.count = 1; // Logs: Changed count to 1
+
+
+
+    function logExecution(fn) {
+        return function (...args) {
+            console.log(`Calling ${fn.name} with`, args);
+            return fn(...args);
+        };
+    }
+
+    const multiply = logExecution((a, b) => a * b);
+    console.log(multiply(2, 3)); // Logs input and result
