@@ -1710,3 +1710,16 @@ for (const num of range) {
     const emitter = new Emitter();
     emitter.on('log', msg => console.log('Received:', msg));
     emitter.emit('log', 'Hello!');
+
+
+    function debounce(fn, delay) {
+        let timeout;
+        return (...args) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => fn.apply(this, args), delay);
+        };
+    }
+
+    const log = debounce(console.log, 500);
+    log('Typing...');
+    log('Still typing...');
