@@ -1786,3 +1786,16 @@ for (const num of range) {
     retry(() => fetch('/api/data'), 3)
         .then(res => console.log('Success'))
         .catch(err => console.error('Failed after 3 tries'));
+
+
+
+    const key = 'dynamic';
+    const obj = {
+        [key]: 42,
+        ['say' + 'Hi']() {
+            return 'Hello!';
+        }
+    };
+
+    console.log(obj.dynamic); // 42
+    console.log(obj.sayHi()); // Hello!
