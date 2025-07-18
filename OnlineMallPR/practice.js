@@ -1771,3 +1771,18 @@ for (const num of range) {
     for (const num of countdown) {
         console.log(num);
     }
+
+
+    async function retry(fn, attempts = 3) {
+        while (attempts--) {
+            try {
+                return await fn();
+            } catch (e) {
+                if (attempts === 0) throw e;
+            }
+        }
+    }
+
+    retry(() => fetch('/api/data'), 3)
+        .then(res => console.log('Success'))
+        .catch(err => console.error('Failed after 3 tries'));
