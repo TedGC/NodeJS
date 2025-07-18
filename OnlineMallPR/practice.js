@@ -1723,3 +1723,24 @@ for (const num of range) {
     const log = debounce(console.log, 500);
     log('Typing...');
     log('Still typing...');
+
+
+
+    const user = {
+        name: 'John',
+        age: 25
+    };
+
+    const validator = {
+        set(obj, prop, value) {
+            if (prop === 'age' && typeof value !== 'number') {
+                throw new Error('Age must be a number');
+            }
+            obj[prop] = value;
+            return true;
+        }
+    };
+
+    const proxy = new Proxy(user, validator);
+    proxy.age = 30; // OK
+// proxy.age = 'old'; // Throws error
