@@ -1799,3 +1799,14 @@ for (const num of range) {
 
     console.log(obj.dynamic); // 42
     console.log(obj.sayHi()); // Hello!
+
+
+    function flatten(arr) {
+        return arr.reduce(
+            (acc, val) =>
+                Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val),
+            []
+        );
+    }
+
+    console.log(flatten([1, [2, [3, 4]], 5])); // [1, 2, 3, 4, 5]
