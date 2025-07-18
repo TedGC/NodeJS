@@ -1680,3 +1680,16 @@ for (const num of range) {
     const fastAdd = memoize(slowAdd);
     console.log(fastAdd(3, 4)); // Calculates
     console.log(fastAdd(3, 4)); // Cached
+
+    function curry(fn) {
+        return function curried(...args) {
+            if (args.length >= fn.length) {
+                return fn.apply(this, args);
+            }
+            return (...next) => curried(...args, ...next);
+        };
+    }
+
+    const multiply = (a, b, c) => a * b * c;
+    const curriedMultiply = curry(multiply);
+    console.log(curriedMultiply(2)(3)(4)); // 2
