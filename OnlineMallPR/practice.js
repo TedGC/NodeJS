@@ -1753,3 +1753,21 @@ for (const num of range) {
     }
 
     console.log(add(1)(2)(3) == 6); // true
+
+    const countdown = {
+        from: 3,
+        [Symbol.iterator]() {
+            let current = this.from;
+            return {
+                next() {
+                    return current >= 0
+                        ? { value: current--, done: false }
+                        : { done: true };
+                }
+            };
+        }
+    };
+
+    for (const num of countdown) {
+        console.log(num);
+    }
