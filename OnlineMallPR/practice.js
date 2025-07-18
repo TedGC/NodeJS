@@ -1743,4 +1743,13 @@ for (const num of range) {
 
     const proxy = new Proxy(user, validator);
     proxy.age = 30; // OK
-// proxy.age = 'old'; // Throws error
+    // proxy.age = 'old'; // Throws error
+
+
+    function add(a) {
+        const fn = b => add(a + b);
+        fn.valueOf = () => a;
+        return fn;
+    }
+
+    console.log(add(1)(2)(3) == 6); // true
