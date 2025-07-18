@@ -1693,3 +1693,20 @@ for (const num of range) {
     const multiply = (a, b, c) => a * b * c;
     const curriedMultiply = curry(multiply);
     console.log(curriedMultiply(2)(3)(4)); // 2
+
+
+    class Emitter {
+        constructor() {
+            this.events = {};
+        }
+        on(event, cb) {
+            (this.events[event] ||= []).push(cb);
+        }
+        emit(event, data) {
+            (this.events[event] || []).forEach(cb => cb(data));
+        }
+    }
+
+    const emitter = new Emitter();
+    emitter.on('log', msg => console.log('Received:', msg));
+    emitter.emit('log', 'Hello!');
