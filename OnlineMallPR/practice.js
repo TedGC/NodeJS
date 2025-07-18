@@ -1659,3 +1659,24 @@ for (const num of range) {
             console.log('Skipped lodash');
         }
     })();
+
+
+    function memoize(fn) {
+        const cache = new Map();
+        return function (...args) {
+            const key = JSON.stringify(args);
+            if (cache.has(key)) return cache.get(key);
+            const result = fn(...args);
+            cache.set(key, result);
+            return result;
+        };
+    }
+
+    const slowAdd = (a, b) => {
+        console.log('Calculating...');
+        return a + b;
+    };
+
+    const fastAdd = memoize(slowAdd);
+    console.log(fastAdd(3, 4)); // Calculates
+    console.log(fastAdd(3, 4)); // Cached
