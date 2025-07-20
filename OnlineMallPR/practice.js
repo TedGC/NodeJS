@@ -1810,3 +1810,13 @@ for (const num of range) {
     }
 
     console.log(flatten([1, [2, [3, 4]], 5])); // [1, 2, 3, 4, 5]
+
+
+
+    const compose = (...fns) => x => fns.reduceRight((v, f) => f(v), x);
+
+    const double = x => x * 2;
+    const square = x => x ** 2;
+
+    const doubleThenSquare = compose(square, double);
+    console.log(doubleThenSquare(3)); // (3 * 2)^2 = 36
