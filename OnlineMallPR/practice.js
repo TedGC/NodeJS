@@ -1885,3 +1885,32 @@ for (const num of range) {
     }
 
     traverse(tree);
+
+
+    class LRUCache {
+        constructor(limit = 3) {
+            this.cache = new Map();
+            this.limit = limit;
+        }
+
+        get(key) {
+            if (!this.cache.has(key)) return -1;
+            const value = this.cache.get(key);
+            this.cache.delete(key);
+            this.cache.set(key, value);
+            return value;
+        }
+
+        put(key, value) {
+            if (this.cache.has(key)) this.cache.delete(key);
+            else if (this.cache.size >= this.limit) this.cache.delete(this.cache.keys().next().value);
+            this.cache.set(key, value);
+        }
+    }
+
+    const lru = new LRUCache();
+    lru.put('a', 1);
+    lru.put('b', 2);
+    lru.put('c', 3);
+    lru.put('d', 4); // 'a' evicted
+    console.log(lru.get('a')); // -1
