@@ -1847,3 +1847,21 @@ for (const num of range) {
         for (let i = 0; i < e.data; i++) sum += i;
         postMessage(sum);
     };
+
+
+    class Person {
+        #ssn;
+        constructor(name, ssn) {
+            this.name = name;
+            this.#ssn = ssn;
+        }
+        static create(data) {
+            return new Person(data.name, data.ssn);
+        }
+        getSSN() {
+            return this.#ssn;
+        }
+    }
+
+    const p = Person.create({ name: 'John', ssn: '123-45-6789' });
+    console.log(p.getSSN());
