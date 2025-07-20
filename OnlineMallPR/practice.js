@@ -1820,3 +1820,9 @@ for (const num of range) {
 
     const doubleThenSquare = compose(square, double);
     console.log(doubleThenSquare(3)); // (3 * 2)^2 = 36
+
+
+    document.getElementById('load').addEventListener('click', async () => {
+        const { add } = await import('./math.js');
+        console.log(add(2, 3));
+    });
