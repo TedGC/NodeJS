@@ -1865,3 +1865,23 @@ for (const num of range) {
 
     const p = Person.create({ name: 'John', ssn: '123-45-6789' });
     console.log(p.getSSN());
+
+
+
+    const tree = {
+        value: 1,
+        children: [
+            { value: 2, children: [] },
+            {
+                value: 3,
+                children: [{ value: 4, children: [] }]
+            }
+        ]
+    };
+
+    function traverse(node) {
+        console.log(node.value);
+        node.children.forEach(traverse);
+    }
+
+    traverse(tree);
