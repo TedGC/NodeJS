@@ -1826,3 +1826,11 @@ for (const num of range) {
         const { add } = await import('./math.js');
         console.log(add(2, 3));
     });
+
+    function highlight(strings, ...values) {
+        return strings.reduce((result, str, i) =>
+            `${result}${str}<strong>${values[i] || ''}</strong>`, '');
+    }
+
+    const name = 'Ted';
+    console.log(highlight`Hello, ${name}!`);
