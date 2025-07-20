@@ -1938,3 +1938,20 @@ for (const num of range) {
         });
 
     setTimeout(() => controller.abort(), 100); // Cancel fetch after 100ms
+
+
+    function reactive(obj, cb) {
+        return new Proxy(obj, {
+            set(target, prop, value) {
+                target[prop] = value;
+                cb(prop, value);
+                return true;
+            }
+        });
+    }
+
+    const state = reactive({ count: 0 }, (key, val) =>
+        console.log(`Property ${key} changed to ${val}`)
+    );
+
+    state.count++; // Logs: Property count changed to 1
