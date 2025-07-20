@@ -1834,3 +1834,16 @@ for (const num of range) {
 
     const name = 'Ted';
     console.log(highlight`Hello, ${name}!`);
+
+
+    // main.js
+    const worker = new Worker('worker.js');
+    worker.onmessage = e => console.log('Result:', e.data);
+    worker.postMessage(1000000);
+
+    // worker.js
+    onmessage = function (e) {
+        let sum = 0;
+        for (let i = 0; i < e.data; i++) sum += i;
+        postMessage(sum);
+    };
