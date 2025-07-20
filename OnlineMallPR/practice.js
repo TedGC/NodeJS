@@ -1914,3 +1914,14 @@ for (const num of range) {
     lru.put('c', 3);
     lru.put('d', 4); // 'a' evicted
     console.log(lru.get('a')); // -1
+
+
+    const original = {
+        name: 'Ted',
+        address: { city: 'Tokyo' }
+    };
+
+    const clone = structuredClone(original);
+    clone.address.city = 'Osaka';
+
+    console.log(original.address.city); // Tokyo
