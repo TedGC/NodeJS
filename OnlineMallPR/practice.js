@@ -1925,3 +1925,16 @@ for (const num of range) {
     clone.address.city = 'Osaka';
 
     console.log(original.address.city); // Tokyo
+
+    const controller = new AbortController();
+
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        signal: controller.signal
+    })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => {
+            if (err.name === 'AbortError') console.log('Request aborted');
+        });
+
+    setTimeout(() => controller.abort(), 100); // Cancel fetch after 100ms
