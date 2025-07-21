@@ -2097,3 +2097,24 @@ for (const num of range) {
                 </>
             );
         }
+
+        import React from 'react';
+
+        class ErrorBoundary extends React.Component {
+            state = { hasError: false };
+
+            static getDerivedStateFromError() {
+                return { hasError: true };
+            }
+
+            componentDidCatch(err, info) {
+                console.error(err, info);
+            }
+
+            render() {
+                if (this.state.hasError) return <h1>Something went wrong.</h1>;
+                return this.props.children;
+            }
+        }
+
+// Usage: <ErrorBoundary><Component /></ErrorBoundary>
