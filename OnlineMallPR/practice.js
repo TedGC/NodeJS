@@ -2052,5 +2052,14 @@ for (const num of range) {
             return debounced;
         }
 
-// Usage
-// const debouncedSearch = useDebounce(searchTerm, 500);
+        // Usage
+        // const debouncedSearch = useDebounce(searchTerm, 500);
+
+        import ReactDOM from 'react-dom';
+
+        function Modal({ children }) {
+            return ReactDOM.createPortal(
+                <div className="modal">{children}</div>,
+                document.getElementById('modal-root')
+            );
+        }
