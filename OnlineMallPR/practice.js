@@ -2081,3 +2081,19 @@ for (const num of range) {
         <MouseTracker>
             {({ x, y }) => <h1>Mouse at ({x}, {y})</h1>}
         </MouseTracker>
+
+        import { forwardRef, useRef } from 'react';
+
+        const Input = forwardRef((props, ref) => (
+            <input ref={ref} {...props} />
+        ));
+
+        function App() {
+            const ref = useRef();
+            return (
+                <>
+                    <Input ref={ref} />
+                    <button onClick={() => ref.current.focus()}>Focus</button>
+                </>
+            );
+        }
