@@ -2005,6 +2005,18 @@ for (const num of range) {
 
         export const useCounter = () => useContext(CounterContext);
 
-// Usage
-// <CounterProvider><App /></CounterProvider>
-// Inside App: const { state, dispatch } = useCounter();
+        // Usage
+        // <CounterProvider><App /></CounterProvider>
+        // Inside App: const { state, dispatch } = useCounter();
+
+        import { lazy, Suspense } from 'react';
+
+        const Settings = lazy(() => import('./Settings'));
+
+        function App() {
+            return (
+                <Suspense fallback={<p>Loading...</p>}>
+                    <Settings />
+                </Suspense>
+            );
+        }
