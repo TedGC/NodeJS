@@ -2117,4 +2117,17 @@ for (const num of range) {
             }
         }
 
-// Usage: <ErrorBoundary><Component /></ErrorBoundary>
+        // Usage: <ErrorBoundary><Component /></ErrorBoundary>
+
+        import { useRef, useEffect } from 'react';
+
+        function usePrevious(value) {
+            const ref = useRef();
+            useEffect(() => {
+                ref.current = value;
+            }, [value]);
+            return ref.current;
+        }
+
+// Usage
+// const prevValue = usePrevious(currentValue);
