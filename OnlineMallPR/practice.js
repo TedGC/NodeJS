@@ -2063,3 +2063,21 @@ for (const num of range) {
                 document.getElementById('modal-root')
             );
         }
+
+        function MouseTracker({ children }) {
+            const [pos, setPos] = useState({ x: 0, y: 0 });
+
+            return (
+                <div
+                    onMouseMove={e => setPos({ x: e.clientX, y: e.clientY })}
+                    style={{ height: '100vh' }}
+                >
+                    {children(pos)}
+                </div>
+            );
+        }
+
+        // Usage
+        <MouseTracker>
+            {({ x, y }) => <h1>Mouse at ({x}, {y})</h1>}
+        </MouseTracker>
