@@ -1981,3 +1981,30 @@ for (const num of range) {
         const ref = useClickOutside(close);
 
         return <div ref={ref}>Dropdown Content</div>;
+
+
+        import { createContext, useReducer, useContext } from 'react';
+
+        const CounterContext = createContext();
+
+        function reducer(state, action) {
+            switch (action.type) {
+                case 'increment': return { count: state.count + 1 };
+                default: return state;
+            }
+        }
+
+        export const CounterProvider = ({ children }) => {
+            const [state, dispatch] = useReducer(reducer, { count: 0 });
+            return (
+                <CounterContext.Provider value={{ state, dispatch }}>
+                    {children}
+                </CounterContext.Provider>
+            );
+        };
+
+        export const useCounter = () => useContext(CounterContext);
+
+// Usage
+// <CounterProvider><App /></CounterProvider>
+// Inside App: const { state, dispatch } = useCounter();
