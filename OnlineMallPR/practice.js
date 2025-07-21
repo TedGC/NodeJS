@@ -1955,3 +1955,29 @@ for (const num of range) {
     );
 
     state.count++; // Logs: Property count changed to 1
+
+
+    import { useEffect, useRef } from 'react';
+
+    function useClickOutside(callback) {
+        const ref = useRef();
+
+        useEffect(() => {
+            const handler = e => {
+                if (ref.current && !ref.current.contains(e.target)) {
+                    callback();
+                }
+            };
+            document.addEventListener('mousedown', handler);
+            return () => document.removeEventListener('mousedown', handler);
+        }, [callback]);
+
+        return ref;
+    }
+
+    // Usage
+    function Dropdown() {
+        const close = () => console.log('Clicked outside!');
+        const ref = useClickOutside(close);
+
+        return <div ref={ref}>Dropdown Content</div>;
