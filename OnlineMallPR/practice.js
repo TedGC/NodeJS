@@ -2020,3 +2020,23 @@ for (const num of range) {
                 </Suspense>
             );
         }
+
+        const schema = [
+            { name: 'username', type: 'text' },
+            { name: 'age', type: 'number' }
+        ];
+
+        function DynamicForm() {
+            return (
+                <form>
+                    {schema.map(field => (
+                        <input
+                            key={field.name}
+                            type={field.type}
+                            placeholder={field.name}
+                            name={field.name}
+                        />
+                    ))}
+                </form>
+            );
+        }
