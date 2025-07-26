@@ -2196,3 +2196,12 @@ for (const num of range) {
         });
 
         app.listen(3000);
+
+
+        const { Worker, isMainThread, parentPort } = require('worker_threads');
+
+        if (isMainThread) {
+            new Worker(__filename);
+        } else {
+            parentPort.postMessage('Hello from worker!');
+        }
