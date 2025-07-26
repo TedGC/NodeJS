@@ -2240,3 +2240,19 @@ for (const num of range) {
         });
 
         app.listen(3000);
+
+
+        const rateLimit = require('express-rate-limit');
+
+        const limiter = rateLimit({
+            windowMs: 60 * 1000,
+            max: 5,
+            message: 'Too many requests'
+        });
+
+        const express = require('express');
+        const app = express();
+        app.use(limiter);
+
+        app.get('/', (req, res) => res.send('Hello!'));
+        app.listen(3000);
