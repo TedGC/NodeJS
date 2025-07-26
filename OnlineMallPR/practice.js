@@ -2220,3 +2220,11 @@ for (const num of range) {
             if (err) return console.error(err);
             console.log(stdout);
         });
+
+
+        const WebSocket = require('ws');
+        const server = new WebSocket.Server({ port: 8080 });
+
+        server.on('connection', socket => {
+            socket.on('message', msg => socket.send(`Echo: ${msg}`));
+        });
