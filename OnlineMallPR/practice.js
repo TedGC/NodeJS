@@ -2212,3 +2212,11 @@ for (const num of range) {
         const emitter = new MyEmitter();
         emitter.on('data', (msg) => console.log('Received:', msg));
         emitter.emit('data', 'Hello Events!');
+
+
+        const { exec } = require('child_process');
+
+        exec('ls -la', (err, stdout, stderr) => {
+            if (err) return console.error(err);
+            console.log(stdout);
+        });
