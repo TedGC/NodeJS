@@ -2169,3 +2169,30 @@ for (const num of range) {
                 res.end(`Handled by worker ${process.pid}`);
             }).listen(3000);
         }
+
+
+
+        const jwt = require('jsonwebtoken');
+        const express = require('express');
+        const app = express();
+
+        const secret = 'mySecret';
+
+        app.use(express.json());
+
+        app.post('/login', (req, res) => {
+            const token = jwt.sign({ userId: 123 }, secret, { expiresIn: '1h' });
+            res.json({ token });
+        });
+
+        app.get('/secure', (req, res) => {
+            const token = req.headers.authorization?.split(' ')[1];
+            try {
+                const decoded = jwt.verify(token, secret);
+                res.send(`Hello user ${decoded.userId}`);
+            } catch {
+                res.status(401).send('Unauthorized');
+            }
+        });
+
+        app.listen(3000);
