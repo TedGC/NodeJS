@@ -2228,3 +2228,15 @@ for (const num of range) {
         server.on('connection', socket => {
             socket.on('message', msg => socket.send(`Echo: ${msg}`));
         });
+
+
+        const express = require('express');
+        const multer = require('multer');
+        const app = express();
+        const upload = multer({ dest: 'uploads/' });
+
+        app.post('/upload', upload.single('file'), (req, res) => {
+            res.send('File uploaded: ' + req.file.originalname);
+        });
+
+        app.listen(3000);
