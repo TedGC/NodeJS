@@ -2156,3 +2156,16 @@ for (const num of range) {
 
         app.get('/', (req, res) => res.send('Hello!'));
         app.listen(3000);
+
+        const cluster = require('cluster');
+        const os = require('os');
+
+        if (cluster.isPrimary) {
+            const numCPUs = os.cpus().length;
+            console.log(`Forking ${numCPUs} workers`);
+            for (let i = 0; i < numCPUs; i++) cluster.fork();
+        } else {
+            require('http').createServer((req, res) => {
+                res.end(`Handled by worker ${process.pid}`);
+            }).listen(3000);
+        }
