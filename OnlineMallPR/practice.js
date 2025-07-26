@@ -2205,3 +2205,10 @@ for (const num of range) {
         } else {
             parentPort.postMessage('Hello from worker!');
         }
+
+        const EventEmitter = require('events');
+        class MyEmitter extends EventEmitter { }
+
+        const emitter = new MyEmitter();
+        emitter.on('data', (msg) => console.log('Received:', msg));
+        emitter.emit('data', 'Hello Events!');
