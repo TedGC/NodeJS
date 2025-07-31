@@ -2312,3 +2312,13 @@ for (const num of range) {
         };
 
         for (const num of range) console.log(num); // 1 2 3 4 5
+
+        const wait = ms => new Promise(res => setTimeout(res, ms));
+
+        async function run() {
+            const [a, b] = await Promise.all([wait(1000), wait(2000)]);
+            console.log('Both promises resolved');
+        }
+
+        run();
+
