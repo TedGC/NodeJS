@@ -2327,3 +2327,14 @@ for (const num of range) {
 
         console.log(multiply(2)(3)(4)); // 24
 
+
+
+        function debounce(fn, delay) {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => fn(...args), delay);
+            };
+        }
+
+        window.addEventListener('resize', debounce(() => console.log('Resized!'), 500));
