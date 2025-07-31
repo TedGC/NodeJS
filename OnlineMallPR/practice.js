@@ -2256,3 +2256,15 @@ for (const num of range) {
 
         app.get('/', (req, res) => res.send('Hello!'));
         app.listen(3000);
+
+        function createCounter() {
+            let count = 0;
+            return {
+                increment() { return ++count; },
+                decrement() { return --count; }
+            };
+        }
+
+        const counter = createCounter();
+        console.log(counter.increment()); // 1
+        console.log(counter.increment()); // 2
