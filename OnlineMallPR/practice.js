@@ -2338,3 +2338,19 @@ for (const num of range) {
         }
 
         window.addEventListener('resize', debounce(() => console.log('Resized!'), 500));
+
+
+        function deepClone(obj) {
+            if (obj === null || typeof obj !== 'object') return obj;
+            if (Array.isArray(obj)) return obj.map(deepClone);
+
+            return Object.keys(obj).reduce((acc, key) => {
+                acc[key] = deepClone(obj[key]);
+                return acc;
+            }, {});
+        }
+
+        const original = { a: 1, b: { c: 2 } };
+        const clone = deepClone(original);
+        clone.b.c = 99;
+        console.log(original.b.c); // 2
