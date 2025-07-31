@@ -2295,4 +2295,20 @@ for (const num of range) {
         });
 
         proxy.age = 30; // OK
-// proxy.age = -5; // Throws error
+        // proxy.age = -5; // Throws error
+
+        const range = {
+            from: 1,
+            to: 5,
+            [Symbol.iterator]() {
+                let current = this.from;
+                return {
+                    next: () => ({
+                        done: current > this.to,
+                        value: current++
+                    })
+                };
+            }
+        };
+
+        for (const num of range) console.log(num); // 1 2 3 4 5
