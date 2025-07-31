@@ -2282,3 +2282,17 @@ for (const num of range) {
         const fastFib = memoize(slowFib);
 
         console.log(fastFib(35)); // much faster on repeat calls
+
+
+        const person = { name: 'Alice', age: 25 };
+
+        const proxy = new Proxy(person, {
+            set(target, prop, value) {
+                if (prop === 'age' && value < 0) throw new Error('Age must be positive!');
+                target[prop] = value;
+                return true;
+            }
+        });
+
+        proxy.age = 30; // OK
+// proxy.age = -5; // Throws error
