@@ -2268,3 +2268,17 @@ for (const num of range) {
         const counter = createCounter();
         console.log(counter.increment()); // 1
         console.log(counter.increment()); // 2
+
+        function memoize(fn) {
+            const cache = {};
+            return function (...args) {
+                const key = JSON.stringify(args);
+                if (!cache[key]) cache[key] = fn(...args);
+                return cache[key];
+            };
+        }
+
+        const slowFib = n => n <= 1 ? n : slowFib(n - 1) + slowFib(n - 2);
+        const fastFib = memoize(slowFib);
+
+        console.log(fastFib(35)); // much faster on repeat calls
