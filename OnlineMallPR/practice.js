@@ -2514,3 +2514,21 @@ for (const num of range) {
         }
 
         runTasks();
+
+        const person = {
+            name: "Ted",
+            age: 28
+        };
+
+        const proxy = new Proxy(person, {
+            set(target, prop, value) {
+                if (prop === "age" && (value < 0 || value > 150)) {
+                    throw new Error("Invalid age");
+                }
+                target[prop] = value;
+                return true;
+            }
+        });
+
+        proxy.age = 30;
+// proxy.age = -5; // Error
