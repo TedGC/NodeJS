@@ -2422,3 +2422,16 @@ for (const num of range) {
         const fastFib = memoize(slowFib);
 
         console.log(fastFib(40));
+
+        function debounce(fn, delay) {
+            let timeout;
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => fn(...args), delay);
+            };
+        }
+
+        window.addEventListener(
+            "resize",
+            debounce(() => console.log("Window resized!"), 300)
+        );
