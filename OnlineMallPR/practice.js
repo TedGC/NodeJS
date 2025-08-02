@@ -2531,4 +2531,17 @@ for (const num of range) {
         });
 
         proxy.age = 30;
-// proxy.age = -5; // Error
+        // proxy.age = -5; // Error
+
+        function curry(fn) {
+            return function curried(...args) {
+                return args.length >= fn.length
+                    ? fn.apply(this, args)
+                    : (...next) => curried.apply(this, args.concat(next));
+            };
+        }
+
+        const sum = (a, b, c) => a + b + c;
+        const curriedSum = curry(sum);
+
+        console.log(curriedSum(1)(2)(3)); // 6
