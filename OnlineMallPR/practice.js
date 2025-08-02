@@ -2384,3 +2384,25 @@ for (const num of range) {
         console.log(gen.next().value); // 1
         console.log(gen.next().value); // 1
         console.log(gen.next().value); // 2
+
+
+        class EventEmitter {
+            constructor() {
+                this.events = {};
+            }
+
+            on(event, listener) {
+                if (!this.events[event]) this.events[event] = [];
+                this.events[event].push(listener);
+            }
+
+            emit(event, ...args) {
+                if (this.events[event]) {
+                    this.events[event].forEach(listener => listener(...args));
+                }
+            }
+        }
+
+        const bus = new EventEmitter();
+        bus.on("greet", name => console.log(`Hello ${name}`));
+        bus.emit("greet", "Ted");
