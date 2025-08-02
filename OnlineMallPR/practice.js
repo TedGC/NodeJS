@@ -2435,3 +2435,22 @@ for (const num of range) {
             "resize",
             debounce(() => console.log("Window resized!"), 300)
         );
+
+
+        function deepClone(obj, hash = new WeakMap()) {
+            if (Object(obj) !== obj) return obj;
+            if (hash.has(obj)) return hash.get(obj);
+
+            const result = Array.isArray(obj) ? [] : {};
+            hash.set(obj, result);
+
+            for (let key in obj) {
+                result[key] = deepClone(obj[key], hash);
+            }
+            return result;
+        }
+
+        const original = { a: 1, b: { c: 2 } };
+        const clone = deepClone(original);
+        clone.b.c = 99;
+        console.log(original.b.c); // 2
