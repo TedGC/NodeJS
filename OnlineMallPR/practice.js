@@ -2500,3 +2500,17 @@ for (const num of range) {
         lru.put('a', 1); lru.put('b', 2); lru.put('c', 3);
         lru.get('a'); lru.put('d', 4);
         console.log([...lru.cache.keys()]); // b, c, a
+
+
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
+        async function runTasks() {
+            const tasks = [1, 2, 3].map(i =>
+                delay(i * 1000).then(() => `Task ${i} done`)
+            );
+
+            const results = await Promise.all(tasks);
+            console.log(results);
+        }
+
+        runTasks();
