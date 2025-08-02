@@ -2454,3 +2454,21 @@ for (const num of range) {
         const clone = deepClone(original);
         clone.b.c = 99;
         console.log(original.b.c); // 2
+
+
+        function myPromiseAll(promises) {
+            return new Promise((resolve, reject) => {
+                const results = [];
+                let completed = 0;
+
+                promises.forEach((p, i) => {
+                    Promise.resolve(p).then(val => {
+                        results[i] = val;
+                        completed++;
+                        if (completed === promises.length) resolve(results);
+                    }).catch(reject);
+                });
+            });
+        }
+
+        myPromiseAll([Promise.resolve(1), Promise.resolve(2)]).then(console.log);
