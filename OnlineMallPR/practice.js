@@ -2545,3 +2545,11 @@ for (const num of range) {
         const curriedSum = curry(sum);
 
         console.log(curriedSum(1)(2)(3)); // 6
+
+
+        const worker = new Worker('worker.js');
+
+        worker.postMessage(5);
+
+        worker.onmessage = (e) => {
+            console.log('Factorial:', e.data);
