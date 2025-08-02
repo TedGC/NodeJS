@@ -2406,3 +2406,19 @@ for (const num of range) {
         const bus = new EventEmitter();
         bus.on("greet", name => console.log(`Hello ${name}`));
         bus.emit("greet", "Ted");
+
+        const memoize = fn => {
+            const cache = new Map();
+            return (...args) => {
+                const key = JSON.stringify(args);
+                if (cache.has(key)) return cache.get(key);
+                const result = fn(...args);
+                cache.set(key, result);
+                return result;
+            };
+        };
+
+        const slowFib = n => (n < 2 ? n : slowFib(n - 1) + slowFib(n - 2));
+        const fastFib = memoize(slowFib);
+
+        console.log(fastFib(40));
