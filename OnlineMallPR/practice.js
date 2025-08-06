@@ -2580,3 +2580,13 @@ for (const num of range) {
 
                 return <input onChange={e => setQuery(e.target.value)} placeholder="Search..." />;
             }
+
+
+            const withAuth = Component => props => {
+                const isAuthenticated = !!localStorage.getItem("token");
+                return isAuthenticated ? <Component {...props} /> : <h2>Access Denied</h2>;
+            };
+
+            // Usage
+            const Dashboard = () => <h1>Private Dashboard</h1>;
+            export default withAuth(Dashboard);
