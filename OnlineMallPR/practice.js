@@ -2674,3 +2674,23 @@ for (const num of range) {
                 const [width, height] = useWindowSize();
                 return <p>Window size: {width} x {height}</p>;
             }
+
+
+            import React, { memo, useState } from "react";
+
+            const ListItem = memo(({ item }) => {
+                console.log("Rendering:", item);
+                return <li>{item}</li>;
+            });
+
+            function App() {
+                const [items] = useState(["A", "B", "C"]);
+                const [count, setCount] = useState(0);
+
+                return (
+                    <>
+                        <ul>{items.map((item, i) => <ListItem key={i} item={item} />)}</ul>
+                        <button onClick={() => setCount(count + 1)}>Increment ({count})</button>
+                    </>
+                );
+            }
