@@ -2637,3 +2637,21 @@ for (const num of range) {
                     </Suspense>
                 );
             }
+
+
+            import { useRef, useEffect } from "react";
+
+            function BlinkingBox() {
+                const boxRef = useRef();
+
+                useEffect(() => {
+                    let visible = true;
+                    const interval = setInterval(() => {
+                        boxRef.current.style.opacity = visible ? 0 : 1;
+                        visible = !visible;
+                    }, 500);
+                    return () => clearInterval(interval);
+                }, []);
+
+                return <div ref={boxRef} style={{ width: 100, height: 100, background: "red" }} />;
+            }
