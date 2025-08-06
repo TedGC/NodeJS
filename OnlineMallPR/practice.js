@@ -2624,3 +2624,16 @@ for (const num of range) {
                     </div>
                 );
             }
+
+
+            import React, { Suspense } from "react";
+
+            const LazyProfile = React.lazy(() => import("./Profile"));
+
+            function App() {
+                return (
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <LazyProfile />
+                    </Suspense>
+                );
+            }
