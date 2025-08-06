@@ -2553,3 +2553,30 @@ for (const num of range) {
 
         worker.onmessage = (e) => {
             console.log('Factorial:', e.data);
+
+
+
+            import { useState, useEffect } from "react";
+
+            function useDebounce(value, delay = 500) {
+                const [debounced, setDebounced] = useState(value);
+
+                useEffect(() => {
+                    const handler = setTimeout(() => setDebounced(value), delay);
+                    return () => clearTimeout(handler);
+                }, [value, delay]);
+
+                return debounced;
+            }
+
+            // Usage
+            function Search() {
+                const [query, setQuery] = useState("");
+                const debouncedQuery = useDebounce(query);
+
+                useEffect(() => {
+                    if (debouncedQuery) console.log("Fetch data for:", debouncedQuery);
+                }, [debouncedQuery]);
+
+                return <input onChange={e => setQuery(e.target.value)} placeholder="Search..." />;
+            }
