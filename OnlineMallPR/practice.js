@@ -2713,3 +2713,23 @@ for (const num of range) {
                     </ErrorBoundary>
                 );
             }
+
+
+            import { useState, useTransition } from "react";
+
+            function FilterList({ items }) {
+                const [query, setQuery] = useState("");
+                const [isPending, startTransition] = useTransition();
+
+                const filtered = items.filter(i => i.includes(query));
+
+                const handleChange = e => startTransition(() => setQuery(e.target.value));
+
+                return (
+                    <>
+                        <input onChange={handleChange} placeholder="Filter..." />
+                        {isPending && <p>Loading...</p>}
+                        <ul>{filtered.map((i, idx) => <li key={idx}>{i}</li>)}</ul>
+                    </>
+                );
+            }
