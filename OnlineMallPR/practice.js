@@ -2655,3 +2655,22 @@ for (const num of range) {
 
                 return <div ref={boxRef} style={{ width: 100, height: 100, background: "red" }} />;
             }
+
+
+            mport { useState, useEffect } from "react";
+
+            function useWindowSize() {
+                const [size, setSize] = useState([window.innerWidth, window.innerHeight]);
+                useEffect(() => {
+                    const handleResize = () => setSize([window.innerWidth, window.innerHeight]);
+                    window.addEventListener("resize", handleResize);
+                    return () => window.removeEventListener("resize", handleResize);
+                }, []);
+                return size;
+            }
+
+            // Usage
+            function App() {
+                const [width, height] = useWindowSize();
+                return <p>Window size: {width} x {height}</p>;
+            }
