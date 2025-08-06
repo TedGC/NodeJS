@@ -2733,3 +2733,26 @@ for (const num of range) {
                     </>
                 );
             }
+
+
+            import React, { useImperativeHandle, forwardRef, useRef } from "react";
+
+            const CustomInput = forwardRef((props, ref) => {
+                const inputRef = useRef();
+                useImperativeHandle(ref, () => ({
+                    focus: () => inputRef.current.focus(),
+                    clear: () => (inputRef.current.value = "")
+                }));
+                return <input ref={inputRef} />;
+            });
+
+            function App() {
+                const ref = useRef();
+                return (
+                    <>
+                        <CustomInput ref={ref} />
+                        <button onClick={() => ref.current.focus()}>Focus</button>
+                        <button onClick={() => ref.current.clear()}>Clear</button>
+                    </>
+                );
+            }
