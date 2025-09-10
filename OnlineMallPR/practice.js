@@ -2821,3 +2821,15 @@ for (const num of range) {
 
                 console.log('DB Host:', process.env.DB_HOST);
                 console.log('DB User:', process.env.DB_USER);
+
+
+
+                const fetch = require('node-fetch');
+
+                async function getData() {
+                    const res = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+                    const data = await res.json();
+                    console.log(data);
+                }
+
+                getData();
