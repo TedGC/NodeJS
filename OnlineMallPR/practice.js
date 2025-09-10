@@ -2844,3 +2844,19 @@ for (const num of range) {
                 });
 
                 emitter.emit('greet', 'Alice');
+
+
+
+                const express = require('express');
+                const app = express();
+
+                function logger(req, res, next) {
+                    console.log(`${req.method} ${req.url}`);
+                    next();
+                }
+
+                app.use(logger);
+
+                app.get('/', (req, res) => res.send('Middleware example'));
+
+                app.listen(6000, () => console.log('Server on 6000'));
