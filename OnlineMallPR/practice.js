@@ -2860,3 +2860,19 @@ for (const num of range) {
                 app.get('/', (req, res) => res.send('Middleware example'));
 
                 app.listen(6000, () => console.log('Server on 6000'));
+
+
+
+
+                import { useState, useEffect } from "react";
+
+                function useDebounce(value, delay = 500) {
+                    const [debounced, setDebounced] = useState(value);
+
+                    useEffect(() => {
+                        const handler = setTimeout(() => setDebounced(value), delay);
+                        return () => clearTimeout(handler);
+                    }, [value, delay]);
+
+                    return debounced;
+                }
