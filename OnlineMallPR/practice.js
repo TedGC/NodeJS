@@ -2786,3 +2786,32 @@ for (const num of range) {
                 app.get('/', (req, res) => res.send('Welcome to Express.js!'));
 
                 app.listen(3000, () => console.log('Express server running on port 3000'));
+
+
+
+                const express = require('express');
+                const app = express();
+                app.use(express.json());
+
+                app.post('/data', (req, res) => {
+                    res.json({ received: req.body });
+                });
+
+                app.listen(4000, () => console.log('Listening on port 4000'));
+
+
+
+                const express = require('express');
+                const app = express();
+                app.use(express.json());
+
+                let items = [];
+
+                app.get('/items', (req, res) => res.json(items));
+
+                app.post('/items', (req, res) => {
+                    items.push(req.body);
+                    res.json({ message: 'Item added', items });
+                });
+
+                app.listen(5000, () => console.log('API running on port 5000'));
