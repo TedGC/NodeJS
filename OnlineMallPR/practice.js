@@ -2769,3 +2769,11 @@ for (const num of range) {
                     if (err) throw err;
                     console.log(data);
                 });
+
+
+                const fs = require('fs');
+
+                fs.writeFile('output.txt', 'This is written by Node.js!', (err) => {
+                    if (err) throw err;
+                    console.log('File created successfully!');
+                });
