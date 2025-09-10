@@ -2731,28 +2731,33 @@ for (const num of range) {
                         {isPending && <p>Loading...</p>}
                         <ul>{filtered.map((i, idx) => <li key={idx}>{i}</li>)}</ul>
                     </>
-                );
-            }
-
 
             import React, { useImperativeHandle, forwardRef, useRef } from "react";
 
-            const CustomInput = forwardRef((props, ref) => {
-                const inputRef = useRef();
-                useImperativeHandle(ref, () => ({
-                    focus: () => inputRef.current.focus(),
-                    clear: () => (inputRef.current.value = "")
-                }));
-                return <input ref={inputRef} />;
-            });
+                const CustomInput = forwardRef((props, ref) => {
+                    const inputRef = useRef();
+                    useImperativeHandle(ref, () => ({
+                        focus: () => inputRef.current.focus(),
+                        clear: () => (inputRef.current.value = "")
+                    }));
+                    return <input ref={inputRef} />;
+                });
 
-            function App() {
-                const ref = useRef();
-                return (
-                    <>
-                        <CustomInput ref={ref} />
-                        <button onClick={() => ref.current.focus()}>Focus</button>
-                        <button onClick={() => ref.current.clear()}>Clear</button>
-                    </>
-                );
-            }
+                function App() {
+                    const ref = useRef();
+                    return (
+                        <>
+                            <CustomInput ref={ref} />
+                            <button onClick={() => ref.current.focus()}>Focus</button>
+                            <button onClick={() => ref.current.clear()}>Clear</button>
+                        </>
+                    );
+                }
+
+
+                const http = require('http');
+
+                http.createServer((req, res) => {
+                    res.writeHead(200, { 'Content-Type': 'text/plain' });
+                    res.end('Hello World from Node.js');
+                }).listen(3000, () => console.log('Server running on port 3000'));
