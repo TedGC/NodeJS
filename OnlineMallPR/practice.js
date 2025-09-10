@@ -2815,3 +2815,9 @@ for (const num of range) {
                 });
 
                 app.listen(5000, () => console.log('API running on port 5000'));
+
+
+                require('dotenv').config();
+
+                console.log('DB Host:', process.env.DB_HOST);
+                console.log('DB User:', process.env.DB_USER);
