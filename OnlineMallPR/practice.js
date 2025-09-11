@@ -2903,3 +2903,7 @@ for (const num of range) {
                 app.post("/api/data", (req, res) => {
                     res.json({ received: req.body });
                 });
+
+
+                const cors = require("cors");
+                app.use(cors({ origin: "http://localhost:3000" }));
