@@ -2955,3 +2955,23 @@ for (const num of range) {
                     );
                 }
                 export default App;
+
+
+                import { createContext, useContext, useState } from "react";
+
+                const UserContext = createContext();
+
+                export function App() {
+                    const [user, setUser] = useState("Alice");
+
+                    return (
+                        <UserContext.Provider value={user}>
+                            <Child />
+                        </UserContext.Provider>
+                    );
+                }
+
+                function Child() {
+                    const user = useContext(UserContext);
+                    return <h2>Hello, {user}!</h2>;
+                }
