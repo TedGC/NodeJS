@@ -2975,3 +2975,10 @@ for (const num of range) {
                     const user = useContext(UserContext);
                     return <h2>Hello, {user}!</h2>;
                 }
+
+                import { Navigate } from "react-router-dom";
+
+                function Protected({ children }) {
+                    const isAuth = localStorage.getItem("token");
+                    return isAuth ? children : <Navigate to="/login" />;
+                }
