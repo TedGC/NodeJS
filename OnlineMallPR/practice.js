@@ -2895,3 +2895,11 @@ for (const num of range) {
                 app.get("/api/users", (req, res) => {
                     res.json([{ id: 1, name: "Alice" }, { id: 2, name: "Bob" }]);
                 });
+
+
+
+                app.use(express.json());
+
+                app.post("/api/data", (req, res) => {
+                    res.json({ received: req.body });
+                });
