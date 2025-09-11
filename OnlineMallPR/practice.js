@@ -2915,3 +2915,24 @@ for (const num of range) {
                 mongoose.connect("mongodb://localhost:27017/testdb")
                     .then(() => console.log("MongoDB connected"))
                     .catch(err => console.error(err));
+
+
+                import { useEffect, useState } from "react";
+
+                function App() {
+                    const [users, setUsers] = useState([]);
+
+                    useEffect(() => {
+                        fetch("http://localhost:5000/api/users")
+                            .then(res => res.json())
+                            .then(data => setUsers(data));
+                    }, []);
+
+                    return (
+                        <ul>
+                            {users.map(u => <li key={u.id}>{u.name}</li>)}
+                        </ul>
+                    );
+                }
+
+                export default App;
