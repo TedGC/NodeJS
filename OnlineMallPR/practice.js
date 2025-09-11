@@ -2907,3 +2907,11 @@ for (const num of range) {
 
                 const cors = require("cors");
                 app.use(cors({ origin: "http://localhost:3000" }));
+
+
+
+                const mongoose = require("mongoose");
+
+                mongoose.connect("mongodb://localhost:27017/testdb")
+                    .then(() => console.log("MongoDB connected"))
+                    .catch(err => console.error(err));
