@@ -3016,3 +3016,19 @@ for (const num of range) {
 
                 const log = debounce(msg => console.log(msg), 500);
                 window.addEventListener("resize", () => log("Resized!"));
+
+
+                function throttle(fn, limit) {
+                    let lastRun = 0;
+                    return (...args) => {
+                        const now = Date.now();
+                        if (now - lastRun >= limit) {
+                            fn(...args);
+                            lastRun = now;
+                        }
+                    };
+                }
+
+                window.addEventListener("scroll", throttle(() => {
+                    console.log("Scroll event handled");
+                }, 1000));
