@@ -3003,3 +3003,16 @@ for (const num of range) {
                 }
 
                 export default App;
+
+
+
+                function debounce(fn, delay) {
+                    let timer;
+                    return (...args) => {
+                        clearTimeout(timer);
+                        timer = setTimeout(() => fn(...args), delay);
+                    };
+                }
+
+                const log = debounce(msg => console.log(msg), 500);
+                window.addEventListener("resize", () => log("Resized!"));
