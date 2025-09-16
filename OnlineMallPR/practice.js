@@ -3070,3 +3070,16 @@ for (const num of range) {
                 retry(() => fetch("https://jsonplaceholder.typicode.com/todos/1")
                     .then(res => res.json()))
                     .then(console.log);
+
+
+                const imgs = document.querySelectorAll("img[data-src]");
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+                imgs.forEach(img => observer.observe(img));
