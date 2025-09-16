@@ -3122,3 +3122,27 @@ for (const num of range) {
                 }
 
                 all([Promise.resolve(1), Promise.resolve(2)]).then(console.log);
+
+
+
+                let page = 1;
+                const container = document.getElementById("content");
+
+                async function loadData() {
+                    const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=5`);
+                    const data = await res.json();
+                    data.forEach(post => {
+                        const div = document.createElement("div");
+                        div.innerText = post.title;
+                        container.appendChild(div);
+                    });
+                    page++;
+                }
+
+                window.addEventListener("scroll", () => {
+                    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                        loadData();
+                    }
+                });
+
+                loadData();
