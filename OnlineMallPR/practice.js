@@ -3083,3 +3083,26 @@ for (const num of range) {
                     });
                 });
                 imgs.forEach(img => observer.observe(img));
+
+
+
+                const routes = {
+                    "/": "Home Page",
+                    "/about": "About Page"
+                };
+
+                function router() {
+                    const content = routes[window.location.pathname] || "Not Found";
+                    document.body.innerText = content;
+                }
+
+                window.onpopstate = router;
+                document.querySelectorAll("a").forEach(link =>
+                    link.addEventListener("click", e => {
+                        e.preventDefault();
+                        history.pushState({}, "", link.href);
+                        router();
+                    })
+                );
+
+                router();
