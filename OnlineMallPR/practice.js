@@ -3032,3 +3032,15 @@ for (const num of range) {
                 window.addEventListener("scroll", throttle(() => {
                     console.log("Scroll event handled");
                 }, 1000));
+
+
+                function deepClone(obj) {
+                    return structuredClone(obj); // modern way
+                    // OR fallback:
+                    // return JSON.parse(JSON.stringify(obj));
+                }
+
+                const original = { a: { b: 2 } };
+                const copy = deepClone(original);
+                copy.a.b = 99;
+                console.log(original.a.b); // stays 2
