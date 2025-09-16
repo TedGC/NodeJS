@@ -3106,3 +3106,20 @@ for (const num of range) {
                 );
 
                 router();
+
+
+                function all(promises) {
+                    return new Promise((resolve, reject) => {
+                        const results = [];
+                        let completed = 0;
+                        promises.forEach((p, i) => {
+                            Promise.resolve(p).then(val => {
+                                results[i] = val;
+                                completed++;
+                                if (completed === promises.length) resolve(results);
+                            }).catch(reject);
+                        });
+                    });
+                }
+
+                all([Promise.resolve(1), Promise.resolve(2)]).then(console.log);
