@@ -3044,3 +3044,17 @@ for (const num of range) {
                 const copy = deepClone(original);
                 copy.a.b = 99;
                 console.log(original.a.b); // stays 2
+
+                class EventBus {
+                    constructor() { this.events = {}; }
+                    on(event, handler) {
+                        (this.events[event] ||= []).push(handler);
+                    }
+                    emit(event, data) {
+                        (this.events[event] || []).forEach(fn => fn(data));
+                    }
+                }
+
+                const bus = new EventBus();
+                bus.on("hello", msg => console.log("Received:", msg));
+                bus.emit("hello", "Hi from EventBus!");
