@@ -3058,3 +3058,15 @@ for (const num of range) {
                 const bus = new EventBus();
                 bus.on("hello", msg => console.log("Received:", msg));
                 bus.emit("hello", "Hi from EventBus!");
+
+
+                async function retry(fn, retries = 3) {
+                    for (let i = 0; i < retries; i++) {
+                        try { return await fn(); }
+                        catch (err) { if (i === retries - 1) throw err; }
+                    }
+                }
+
+                retry(() => fetch("https://jsonplaceholder.typicode.com/todos/1")
+                    .then(res => res.json()))
+                    .then(console.log);
